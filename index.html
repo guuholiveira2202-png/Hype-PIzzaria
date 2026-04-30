@@ -317,6 +317,8 @@
         }
     </style>
 
+
+   
 <body>
 
     <div class="marquee-container">
@@ -334,9 +336,13 @@
                 <li><a href="#camisas">Camisas</a></li>
                 <li><a href="#moletons">Moletons</a></li>
                 <li><a href="#calcas">Calças</a></li>
+                <li><a href="#perfumes">Perfumes</a></li>
             </ul>
         </nav>
-        <button class="cart-btn" id="open-cart">SACOLA <span class="cart-count" id="count">0</span></button>
+        <div style="display: flex; gap: 10px;">
+            <button class="cart-btn" id="open-login" style="background: transparent; color: var(--text-light); border: 1px solid var(--border-glass);">LOGIN</button>
+            <button class="cart-btn" id="open-cart">SACOLA <span class="cart-count" id="count">0</span></button>
+        </div>
     </header>
 
     <div class="quick-select-tab" id="quick-tab">
@@ -345,6 +351,7 @@
         <a href="#camisas" class="quick-select-btn">CAMISAS</a>
         <a href="#moletons" class="quick-select-btn">MOLETONS</a>
         <a href="#calcas" class="quick-select-btn">CALÇAS</a>
+        <a href="#perfumes" class="quick-select-btn">PERFUMES</a>
     </div>
 
     <section class="hero" id="hero">
@@ -454,6 +461,43 @@
             </div>
         </div>
 
+        <div class="category-section" id="perfumes">
+            <h2 class="category-title">PERFUMES <span>// 04</span></h2>
+            <div class="grid">
+                <div class="card">
+                    <div class="card-img">
+                        <span class="price-tag">R$ 450,00</span>
+                        <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=600&q=80" alt="Perfume Cyber Void">
+                    </div>
+                    <div class="card-info">
+                        <h3>Cyber Void - Eau de Parfum</h3>
+                        <p>Amadeirado / Notas de Metal Frio</p>
+                        <div class="sizes">
+                            <button class="size-btn">50ml</button>
+                            <button class="size-btn">100ml</button>
+                        </div>
+                        <button class="add-btn" data-name="Cyber Void - EDP" data-price="450.00" data-img="https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=200&q=80">Adicionar</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-img">
+                        <span class="price-tag">R$ 520,00</span>
+                        <img src="https://images.unsplash.com/photo-1523293115678-d2900e5ce8eb?auto=format&fit=crop&w=600&q=80" alt="Perfume Neon Elixir">
+                    </div>
+                    <div class="card-info">
+                        <h3>Neon Elixir</h3>
+                        <p>Cítrico / Unissex Exclusivo</p>
+                        <div class="sizes">
+                            <button class="size-btn">50ml</button>
+                            <button class="size-btn">100ml</button>
+                        </div>
+                        <button class="add-btn" data-name="Neon Elixir" data-price="520.00" data-img="https://images.unsplash.com/photo-1523293115678-d2900e5ce8eb?auto=format&fit=crop&w=200&q=80">Adicionar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </section>
 
     <div class="overlay" id="overlay"></div>
@@ -491,6 +535,29 @@
             <button class="checkout-btn" id="btn-open-payment">FINALIZAR COMPRA</button>
         </div>
     </aside>
+
+    <div class="payment-modal" id="login-modal">
+        <div class="payment-header">
+            <h2>IDENTIFICAÇÃO</h2>
+            <button class="close-btn" id="close-login">&times;</button>
+        </div>
+        
+        <div class="form-area" style="display: block; margin-top: 20px;">
+            <p style="color: var(--text-dim); margin-bottom: 20px; font-size: 0.9rem;">Insira seus dados para acompanhar seus pedidos e acessar ofertas exclusivas.</p>
+            <div class="input-group">
+                <label>E-mail (Gmail)</label>
+                <input type="email" id="login-email" placeholder="seuemail@gmail.com">
+            </div>
+            <div class="input-group">
+                <label>WhatsApp</label>
+                <input type="text" id="login-whatsapp" placeholder="(00) 00000-0000" maxlength="15">
+            </div>
+            
+            <div id="login-error" class="error-message"></div>
+            
+            <button class="final-pay-btn" id="btn-submit-login">ENTRAR / CADASTRAR</button>
+        </div>
+    </div>
 
     <div class="payment-modal" id="payment-modal">
         <div class="payment-header">
@@ -588,7 +655,6 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
         import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-        // Import unificado do Realtime Database (usando a mesma versão 10.8.0 para evitar conflitos)
         import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
         const firebaseConfig = {
@@ -604,16 +670,19 @@
         const app = initializeApp(firebaseConfig);
         const analytics = getAnalytics(app);
         const dbFirestore = getFirestore(app);
-        const dbRealtime = getDatabase(app); // Database para o catálogo dinâmico
+        const dbRealtime = getDatabase(app); 
 
         // ==========================
-        // VARIÁVEIS GERAIS
+        // VARIÁVEIS GERAIS E ESTADO
         // ==========================
         const formatCurrency = (value) => value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
         let cart = JSON.parse(localStorage.getItem('hype_db_cart')) || [];
         let shippingCost = 0;
         let lastCepData = null; 
+        
+        // Verifica se o usuário já fez login na sessão anterior
+        let currentUser = JSON.parse(localStorage.getItem('hype_logged_user')) || null;
 
         const sidebar = document.getElementById('sidebar');
         const overlay = document.getElementById('overlay');
@@ -624,9 +693,105 @@
         const totalUI = document.getElementById('total-price');
         const modalTotalUI = document.getElementById('modal-total-display');
 
-        function saveCartToLocal() {
-            localStorage.setItem('hype_db_cart', JSON.stringify(cart));
+        function saveCartToLocal() { localStorage.setItem('hype_db_cart', JSON.stringify(cart)); }
+
+        // ==========================
+        // SISTEMA DE LOGIN
+        // ==========================
+        const loginModal = document.getElementById('login-modal');
+        const btnOpenLogin = document.getElementById('open-login');
+        const btnCloseLogin = document.getElementById('close-login');
+        const inputLoginEmail = document.getElementById('login-email');
+        const inputLoginWa = document.getElementById('login-whatsapp');
+        const btnSubmitLogin = document.getElementById('btn-submit-login');
+        const loginError = document.getElementById('login-error');
+
+        // Atualiza a UI se o usuário já estiver logado
+        if (currentUser) {
+            btnOpenLogin.textContent = "CONECTADO";
+            btnOpenLogin.style.color = "var(--acid-green)";
+            btnOpenLogin.style.borderColor = "var(--acid-green)";
         }
+
+        // Máscara WhatsApp: (00) 00000-0000
+        inputLoginWa.addEventListener('input', (e) => {
+            let v = e.target.value.replace(/\D/g, "");
+            v = v.replace(/^(\d{2})(\d)/g, "($1) $2");
+            v = v.replace(/(\d)(\d{4})$/, "$1-$2");
+            e.target.value = v;
+        });
+
+        // Abrir/Fechar Modal de Login
+        btnOpenLogin.addEventListener('click', () => {
+            if(currentUser) {
+                // Se já logado, pode implementar uma opção de "Sair" aqui se desejar
+                alert(`Conectado como: ${currentUser.email}\nWhatsApp: ${currentUser.whatsapp}`);
+                return;
+            }
+            sidebar.classList.remove('open');
+            document.getElementById('payment-modal').classList.remove('active');
+            loginModal.classList.add('active');
+            overlay.classList.add('active');
+        });
+
+        btnCloseLogin.addEventListener('click', () => {
+            loginModal.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+
+        // Processar Login / Cadastro
+        btnSubmitLogin.addEventListener('click', async () => {
+            loginError.textContent = "";
+            const email = inputLoginEmail.value.trim();
+            const wa = inputLoginWa.value.trim();
+
+            if (!email.includes('@') || wa.length < 14) {
+                loginError.textContent = "Preencha um E-mail válido e o WhatsApp completo.";
+                return;
+            }
+
+            const ogText = btnSubmitLogin.innerHTML;
+            btnSubmitLogin.innerHTML = "PROCESSANDO...";
+            btnSubmitLogin.style.opacity = "0.5";
+            btnSubmitLogin.style.pointerEvents = "none";
+
+            try {
+                // Salva o cliente na coleção "clientes" no Firebase
+                await addDoc(collection(dbFirestore, "clientes"), {
+                    email: email,
+                    whatsapp: wa,
+                    createdAt: serverTimestamp()
+                });
+
+                currentUser = { email: email, whatsapp: wa };
+                localStorage.setItem('hype_logged_user', JSON.stringify(currentUser));
+
+                btnSubmitLogin.innerHTML = "CONECTADO!";
+                btnSubmitLogin.style.background = "var(--acid-green)";
+                btnSubmitLogin.style.color = "#000";
+
+                setTimeout(() => {
+                    loginModal.classList.remove('active');
+                    overlay.classList.remove('active');
+                    btnOpenLogin.textContent = "CONECTADO";
+                    btnOpenLogin.style.color = "var(--acid-green)";
+                    btnOpenLogin.style.borderColor = "var(--acid-green)";
+                    
+                    btnSubmitLogin.innerHTML = ogText;
+                    btnSubmitLogin.style.background = "var(--text-light)";
+                    btnSubmitLogin.style.opacity = "1";
+                    btnSubmitLogin.style.pointerEvents = "auto";
+                }, 1000);
+
+            } catch (error) {
+                console.error("Erro ao salvar cliente: ", error);
+                loginError.textContent = "Erro ao conectar. Tente novamente.";
+                btnSubmitLogin.innerHTML = ogText;
+                btnSubmitLogin.style.opacity = "1";
+                btnSubmitLogin.style.pointerEvents = "auto";
+            }
+        });
+
 
         // ==========================
         // OBSERVER DA ABA DE SELEÇÃO RÁPIDA
@@ -668,7 +833,7 @@
 
         function toggleCart() {
             sidebar.classList.toggle('open');
-            if(!document.getElementById('payment-modal').classList.contains('active')){
+            if(!document.getElementById('payment-modal').classList.contains('active') && !document.getElementById('login-modal').classList.contains('active')){
                 overlay.classList.toggle('active');
             }
         }
@@ -679,6 +844,7 @@
         overlay.addEventListener('click', () => {
             sidebar.classList.remove('open');
             document.getElementById('payment-modal').classList.remove('active');
+            loginModal.classList.remove('active');
             overlay.classList.remove('active');
         });
 
@@ -888,6 +1054,13 @@
         const btnProcessPayment = document.getElementById('btn-process-payment');
 
         btnOpenPayment.addEventListener('click', () => {
+            // TRAVA DE SEGURANÇA: EXIGE LOGIN
+            if(!currentUser) {
+                sidebar.classList.remove('open');
+                loginModal.classList.add('active');
+                return;
+            }
+
             if(cart.length === 0) {
                 btnOpenPayment.textContent = "SACOLA VAZIA";
                 btnOpenPayment.style.background = "#ff4444";
@@ -995,6 +1168,7 @@
                 const orderData = {
                     createdAt: serverTimestamp(),
                     status: 'pendente',
+                    cliente: currentUser, // INSERINDO DADOS DO CLIENTE NO PEDIDO
                     items: cart,
                     shipping: {
                         street: inputStreet.value,
@@ -1133,7 +1307,6 @@
                 });
             }
         });
-
     </script>
 </body>
 </html>

@@ -260,7 +260,7 @@
                     <td>#${o.id.substring(0,4)}</td>
                     <td>${o.createdAt?.toDate().toLocaleDateString('pt-BR') || '---'}</td>
                     <td>
-                        <div style="font-weight: 500;">${o.shipping?.name || 'Cliente S/N'}</div>
+                        <div style="font-weight: 500;">${o.cliente?.email || 'Sem login'}</div>
                         <div style="font-size: 0.7rem; color: var(--text-dim);">${o.shipping?.city || 'N/I'}/${o.shipping?.uf || '--'}</div>
                     </td>
                     <td style="font-weight:bold">${fmt(o.totals?.finalTotal || 0)}</td>
@@ -273,13 +273,20 @@
         window.openOrder = (id) => {
             const o = ordersData.find(x => x.id === id);
             document.getElementById('m-id').innerText = `PEDIDO #${id.substring(0,6)}`;
+            
+            // ATUALIZADO: Extraindo E-mail e WhatsApp criados na loja
             document.getElementById('m-content').innerHTML = `
-                <p><b>Cliente:</b> ${o.shipping?.name || 'Não informado'}</p>
-                <p><b>WhatsApp:</b> ${o.shipping?.phone || 'Não informado'}</p>
-                <p><b>Endereço:</b> ${o.shipping?.street}, ${o.shipping?.number}</p>
-                <p><b>Cidade:</b> ${o.shipping?.city}/${o.shipping?.uf}</p>
+                <p><b>E-mail:</b> <span style="color: var(--acid-green);">${o.cliente?.email || 'Não informado'}</span></p>
+                <p><b>WhatsApp:</b> ${o.cliente?.whatsapp || 'Não informado'}</p>
                 <br>
-                <p><b>Itens:</b><br> ${o.items?.map(i => `• ${i.name} (${i.size})`).join('<br>')}</p>
+                <p><b>Endereço:</b> ${o.shipping?.street || ''}, ${o.shipping?.number || ''} ${o.shipping?.complement ? '- ' + o.shipping.complement : ''}</p>
+                <p><b>Bairro:</b> ${o.shipping?.neighborhood || ''}</p>
+                <p><b>Cidade:</b> ${o.shipping?.city || 'N/I'}/${o.shipping?.uf || '--'} (CEP: ${o.shipping?.cep || ''})</p>
+                <p><b>Frete:</b> ${fmt(o.shipping?.cost || 0)}</p>
+                <br>
+                <p><b>Pagamento:</b> ${o.payment?.method || 'N/I'} ${o.payment?.cardLast4 ? '(Final ' + o.payment.cardLast4 + ')' : ''}</p>
+                <br>
+                <p><b>Itens:</b><br> ${o.items?.map(i => `• ${i.name} (Tamanho: ${i.size}) - ${fmt(i.price)}`).join('<br>')}</p>
             `;
             
             document.getElementById('m-btn-approve').onclick = () => updateStatus(id, 'pago');
