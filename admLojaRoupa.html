@@ -18,36 +18,96 @@
             --font-body: 'Space Grotesk', sans-serif; 
             --danger-red: #ff3333;
         }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: var(--bg-base); color: var(--text-light); font-family: var(--font-body); display: flex; height: 100vh; overflow: hidden; }
-        
-        /* SIDEBAR */
-        .sidebar { width: 260px; background: var(--bg-panel); border-right: 1px solid var(--border-glass); padding: 30px 20px; flex-shrink: 0; }
-        .logo { font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; margin-bottom: 50px; letter-spacing: 2px; } 
+
+        body { 
+            background-color: var(--bg-base); 
+            color: var(--text-light); 
+            font-family: var(--font-body); 
+            display: flex; 
+            flex-direction: column; /* Mobile first */
+            height: 100vh; 
+            overflow: hidden; 
+        }
+
+        /* SIDEBAR / NAV */
+        .sidebar { 
+            width: 100%; 
+            background: var(--bg-panel); 
+            border-bottom: 1px solid var(--border-glass); 
+            padding: 15px; 
+            flex-shrink: 0; 
+            z-index: 100;
+        }
+
+        .logo { 
+            font-family: var(--font-display); 
+            font-size: 1rem; 
+            font-weight: 700; 
+            margin-bottom: 15px; 
+            letter-spacing: 2px; 
+            text-align: center;
+        } 
         .logo span { color: var(--acid-green); }
-        .nav-menu { list-style: none; }
-        .nav-menu li a { display: block; color: var(--text-dim); padding: 12px 15px; border-radius: 8px; text-decoration: none; margin-bottom: 10px; transition: 0.3s; font-size: 0.85rem; cursor: pointer; }
-        .nav-menu li a:hover, .nav-menu li a.active { background: rgba(204, 255, 0, 0.05); color: var(--acid-green); }
 
-        /* DASHBOARD METRICS */
-        .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 30px; }
-        .stat-card { background: var(--bg-card); border: 1px solid var(--border-glass); padding: 20px; border-radius: 12px; }
-        .stat-card span { color: var(--text-dim); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; }
-        .stat-card h2 { font-family: var(--font-display); font-size: 1.2rem; margin-top: 10px; color: var(--acid-green); }
+        .nav-menu { 
+            list-style: none; 
+            display: flex; 
+            justify-content: center; 
+            gap: 5px; 
+            overflow-x: auto;
+            padding-bottom: 5px;
+        }
 
-        /* CONTROLS */
-        .table-controls { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        .filter-group { display: flex; gap: 10px; }
-        .filter-btn { background: transparent; border: 1px solid var(--border-glass); color: var(--text-dim); padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 0.75rem; }
-        .filter-btn.active { border-color: var(--acid-green); color: var(--acid-green); background: rgba(204, 255, 0, 0.05); }
+        .nav-menu li a { 
+            display: block; 
+            color: var(--text-dim); 
+            padding: 8px 12px; 
+            border-radius: 8px; 
+            text-decoration: none; 
+            font-size: 0.75rem; 
+            cursor: pointer; 
+            white-space: nowrap;
+            transition: 0.3s;
+        }
+        .nav-menu li a.active { background: rgba(204, 255, 0, 0.1); color: var(--acid-green); }
 
-        /* CONTENT */
-        .main-content { flex: 1; padding: 40px; overflow-y: auto; }
+        /* CONTENT AREA */
+        .main-content { flex: 1; padding: 20px; overflow-y: auto; -webkit-overflow-scrolling: touch; }
         .content-section { display: none; } 
         .content-section.active { display: block; } 
-        
-        table { width: 100%; border-collapse: collapse; background: var(--bg-card); border-radius: 12px; overflow: hidden; }
-        th, td { padding: 15px; border-bottom: 1px solid var(--border-glass); font-size: 0.85rem; }
+
+        /* DASHBOARD METRICS */
+        .stats-grid { display: grid; grid-template-columns: 1fr; gap: 15px; margin-bottom: 25px; }
+        .stat-card { background: var(--bg-card); border: 1px solid var(--border-glass); padding: 20px; border-radius: 12px; }
+        .stat-card span { color: var(--text-dim); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px; }
+        .stat-card h2 { font-family: var(--font-display); font-size: 1.1rem; margin-top: 8px; color: var(--acid-green); }
+
+        /* CONTROLS */
+        .table-controls { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 15px; 
+            margin-bottom: 20px; 
+        }
+        .filter-group { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 5px; }
+        .filter-btn { 
+            background: transparent; 
+            border: 1px solid var(--border-glass); 
+            color: var(--text-dim); 
+            padding: 8px 14px; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            font-size: 0.75rem; 
+            white-space: nowrap;
+        }
+        .filter-btn.active { border-color: var(--acid-green); color: var(--acid-green); background: rgba(204, 255, 0, 0.05); }
+
+        /* TABLES */
+        .table-wrapper { width: 100%; overflow-x: auto; border-radius: 12px; border: 1px solid var(--border-glass); background: var(--bg-card); }
+        table { width: 100%; border-collapse: collapse; min-width: 600px; }
+        th, td { padding: 15px; border-bottom: 1px solid var(--border-glass); font-size: 0.85rem; text-align: left; }
         th { color: var(--text-dim); text-transform: uppercase; font-size: 0.7rem; background: rgba(0,0,0,0.2); }
         
         .badge { padding: 4px 8px; border-radius: 4px; font-size: 0.65rem; font-weight: bold; text-transform: uppercase; }
@@ -56,14 +116,26 @@
         .badge.rejeitado { background: #ff333322; color: var(--danger-red); }
 
         .btn-view { background: transparent; color: #fff; border: 1px solid var(--border-glass); padding: 6px 12px; border-radius: 4px; cursor: pointer; }
-        .btn-view:hover { border-color: var(--acid-green); color: var(--acid-green); }
         
         /* MODAL */
-        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(8px); z-index: 1000; display: none; justify-content: center; align-items: center; }
+        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); z-index: 1000; display: none; justify-content: center; align-items: center; padding: 20px; }
         .modal-overlay.active { display: flex; }
-        .modal { background: var(--bg-panel); border: 1px solid var(--border-glass); border-radius: 16px; width: 600px; max-height: 90vh; overflow-y: auto; padding: 30px; }
+        .modal { background: var(--bg-panel); border: 1px solid var(--border-glass); border-radius: 16px; width: 100%; max-width: 550px; max-height: 90vh; overflow-y: auto; padding: 25px; }
         
-        .input-dark { width: 100%; padding: 12px; background: #000; border: 1px solid var(--border-glass); color: #fff; border-radius: 8px; margin-top: 5px; }
+        .input-dark { width: 100%; padding: 12px; background: #000; border: 1px solid var(--border-glass); color: #fff; border-radius: 8px; margin-bottom: 10px; font-family: inherit; }
+
+        /* DESKTOP ADJUSTMENTS */
+        @media (min-width: 768px) {
+            body { flex-direction: row; }
+            .sidebar { width: 260px; height: 100vh; border-right: 1px solid var(--border-glass); border-bottom: none; padding: 40px 20px; }
+            .logo { text-align: left; font-size: 1.2rem; margin-bottom: 50px; }
+            .nav-menu { flex-direction: column; }
+            .nav-menu li a { font-size: 0.85rem; padding: 12px 15px; }
+            .main-content { padding: 40px; }
+            .stats-grid { grid-template-columns: repeat(3, 1fr); }
+            .table-controls { flex-direction: row; justify-content: space-between; }
+            #form-add-product { flex-direction: row; }
+        }
     </style>
 </head>
 <body>
@@ -72,7 +144,7 @@
         <div class="logo">HYPE<span>.</span> OS</div>
         <ul class="nav-menu">
             <li><a onclick="switchTab('orders')" id="nav-orders" class="active">Vendas</a></li>
-            <li><a onclick="switchTab('products')" id="nav-products">Produtos</a></li>
+            <li><a onclick="switchTab('products')" id="nav-products">Catálogo</a></li>
             <li><a onclick="switchTab('clients')" id="nav-clients">Logística</a></li>
         </ul>
     </aside>
@@ -94,55 +166,61 @@
                 <button onclick="clearAllOrders()" class="filter-btn" style="color: var(--danger-red); border-color: rgba(255,51,51,0.2);">Limpar Tudo</button>
             </div>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Data</th>
-                        <th>Cliente / Localização</th>
-                        <th>Total</th>
-                        <th>Status</th>
-                        <th>Ação</th>
-                    </tr>
-                </thead>
-                <tbody id="orders-table-body"></tbody>
-            </table>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Data</th>
+                            <th>Cliente</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody id="orders-table-body"></tbody>
+                </table>
+            </div>
         </section>
 
         <section id="section-products" class="content-section">
-            <header style="margin-bottom: 20px;"><h1>Catálogo</h1></header>
-            <div style="background: var(--bg-card); padding: 20px; border-radius: 12px; margin-bottom: 30px;">
-                <form id="form-add-product" style="display: flex; gap: 10px;">
-                    <input type="text" id="prod-name" class="input-dark" placeholder="Nome" required>
-                    <input type="number" id="prod-price" class="input-dark" placeholder="Preço" step="0.01" required>
-                    <button type="submit" class="filter-btn active">Adicionar Peça</button>
+            <h1 style="margin-bottom: 20px; font-family: var(--font-display); font-size: 1.2rem;">Gerenciar Catálogo</h1>
+            <div style="background: var(--bg-card); padding: 20px; border-radius: 12px; margin-bottom: 30px; border: 1px solid var(--border-glass);">
+                <form id="form-add-product" style="display: flex; flex-direction: column; gap: 10px;">
+                    <input type="text" id="prod-name" class="input-dark" placeholder="Nome da Peça" required>
+                    <input type="number" id="prod-price" class="input-dark" placeholder="Preço (ex: 150.00)" step="0.01" required>
+                    <button type="submit" class="filter-btn active" style="padding: 12px;">Adicionar Peça</button>
                 </form>
             </div>
-            <table id="products-table">
-                <thead><tr><th>Peça</th><th>Preço</th><th>Ação</th></tr></thead>
-                <tbody id="products-table-body"></tbody>
-            </table>
+            <div class="table-wrapper">
+                <table>
+                    <thead><tr><th>Peça</th><th>Preço</th><th>Ação</th></tr></thead>
+                    <tbody id="products-table-body"></tbody>
+                </table>
+            </div>
         </section>
 
         <section id="section-clients" class="content-section">
-            <h1>Mapa de Calor por Região</h1><br>
-            <table>
-                <thead><tr><th>Cidade/UF</th><th>Vendas Confurmadas</th><th>Receita Região</th></tr></thead>
-                <tbody id="clients-table-body"></tbody>
-            </table>
+            <h1 style="margin-bottom: 20px; font-family: var(--font-display); font-size: 1.2rem;">Mapa de Receita</h1>
+            <div class="table-wrapper">
+                <table>
+                    <thead><tr><th>Cidade/UF</th><th>Vendas</th><th>Receita Total</th></tr></thead>
+                    <tbody id="clients-table-body"></tbody>
+                </table>
+            </div>
         </section>
     </main>
 
     <div class="modal-overlay" id="order-modal">
         <div class="modal">
-            <h2 id="m-id" style="font-family: var(--font-display); color: var(--acid-green);"></h2>
+            <h2 id="m-id" style="font-family: var(--font-display); color: var(--acid-green); font-size: 1rem;"></h2>
             <hr style="border: 0; border-top: 1px solid var(--border-glass); margin: 20px 0;">
-            <div id="m-content"></div>
+            <div id="m-content" style="font-size: 0.9rem; line-height: 1.6;"></div>
             <div style="display: flex; gap: 10px; margin-top: 30px;">
-                <button id="m-btn-approve" class="filter-btn active" style="flex: 1; padding: 15px;">APROVAR PAGAMENTO</button>
+                <button id="m-btn-approve" class="filter-btn active" style="flex: 1; padding: 12px;">APROVAR</button>
                 <button id="m-btn-reject" class="filter-btn" style="flex: 1; color: var(--danger-red);">REJEITAR</button>
             </div>
-            <button onclick="closeModal()" style="width: 100%; margin-top: 10px;" class="filter-btn">Fechar</button>
+            <button onclick="closeModal()" style="width: 100%; margin-top: 10px; border: none; color: var(--text-dim);" class="filter-btn">Fechar</button>
         </div>
     </div>
 
@@ -177,7 +255,7 @@
         // FILTROS
         window.filterOrders = (status, btn) => {
             currentFilter = status;
-            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.filter-group .filter-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             renderOrders();
         };
@@ -208,11 +286,11 @@
                     <td>${o.createdAt?.toDate().toLocaleDateString('pt-BR') || '---'}</td>
                     <td>
                         <div style="font-weight: 500;">${o.shipping?.name || 'Cliente S/N'}</div>
-                        <div style="font-size: 0.7rem; color: var(--text-dim);">${o.shipping?.city || 'Cidade N/I'}/${o.shipping?.uf || '--'}</div>
+                        <div style="font-size: 0.7rem; color: var(--text-dim);">${o.shipping?.city || 'N/I'}/${o.shipping?.uf || '--'}</div>
                     </td>
                     <td style="font-weight:bold">${fmt(o.totals?.finalTotal || 0)}</td>
                     <td><span class="badge ${o.status || 'pendente'}">${o.status || 'pendente'}</span></td>
-                    <td><button class="btn-view" onclick="openOrder('${o.id}')">Detalhes</button></td>
+                    <td><button class="btn-view" onclick="openOrder('${o.id}')">Ver</button></td>
                 </tr>
             `).join('');
         }
@@ -222,10 +300,11 @@
             document.getElementById('m-id').innerText = `PEDIDO #${id.substring(0,6)}`;
             document.getElementById('m-content').innerHTML = `
                 <p><b>Cliente:</b> ${o.shipping?.name || 'Não informado'}</p>
+                <p><b>WhatsApp:</b> ${o.shipping?.phone || 'Não informado'}</p>
                 <p><b>Endereço:</b> ${o.shipping?.street}, ${o.shipping?.number}</p>
                 <p><b>Cidade:</b> ${o.shipping?.city}/${o.shipping?.uf}</p>
                 <br>
-                <p><b>Itens:</b> ${o.items?.map(i => `${i.name} (${i.size})`).join(', ')}</p>
+                <p><b>Itens:</b><br> ${o.items?.map(i => `• ${i.name} (${i.size})`).join('<br>')}</p>
             `;
             
             document.getElementById('m-btn-approve').onclick = () => updateStatus(id, 'pago');
@@ -242,7 +321,7 @@
 
         // LIMPAR TUDO
         window.clearAllOrders = async () => {
-            if (confirm("⚠️ APAGAR TUDO? Isso não pode ser desfeito.") && prompt("Digite 'DELETAR'") === 'DELETAR') {
+            if (confirm("⚠️ ATENÇÃO: Isso apagará TODOS os pedidos do banco de dados. Digite 'DELETAR' para confirmar.") && prompt("Confirme a ação:") === 'DELETAR') {
                 const batch = writeBatch(db);
                 const snap = await getDocs(collection(db, "pedidos"));
                 snap.forEach(d => batch.delete(d.ref));
@@ -254,7 +333,7 @@
         function renderLogistics() {
             const map = {};
             ordersData.filter(o => o.status === 'pago').forEach(o => {
-                const key = `${o.shipping?.city}/${o.shipping?.uf}`;
+                const key = `${o.shipping?.city || 'N/I'}/${o.shipping?.uf || '--'}`;
                 if(!map[key]) map[key] = { count: 0, total: 0 };
                 map[key].count++;
                 map[key].total += o.totals?.finalTotal || 0;
@@ -270,20 +349,24 @@
                 <tr>
                     <td>${d.data().nome}</td>
                     <td>${fmt(d.data().preco)}</td>
-                    <td><button onclick="deleteProd('${d.id}')" style="color:red; background:none; border:none; cursor:pointer">Remover</button></td>
+                    <td><button onclick="deleteProd('${d.id}')" style="color:var(--danger-red); background:none; border:none; cursor:pointer; font-size:0.75rem">Remover</button></td>
                 </tr>
             `).join('');
         });
 
-        window.deleteProd = (id) => deleteDoc(doc(db, "produtos", id));
+        window.deleteProd = (id) => {
+            if(confirm("Remover este produto?")) deleteDoc(doc(db, "produtos", id));
+        };
 
         document.getElementById('form-add-product').onsubmit = async (e) => {
             e.preventDefault();
-            await addDoc(collection(db, "produtos"), {
-                nome: document.getElementById('prod-name').value,
-                preco: parseFloat(document.getElementById('prod-price').value)
-            });
-            e.target.reset();
+            const nome = document.getElementById('prod-name').value;
+            const preco = parseFloat(document.getElementById('prod-price').value);
+            
+            if(nome && preco) {
+                await addDoc(collection(db, "produtos"), { nome, preco });
+                e.target.reset();
+            }
         };
     </script>
 </body>
