@@ -26,7 +26,7 @@
             color: var(--text-light); 
             font-family: var(--font-body); 
             display: flex; 
-            flex-direction: column; /* Mobile first */
+            flex-direction: column; 
             height: 100vh; 
             overflow: hidden; 
         }
@@ -55,20 +55,17 @@
             list-style: none; 
             display: flex; 
             justify-content: center; 
-            gap: 5px; 
-            overflow-x: auto;
-            padding-bottom: 5px;
+            gap: 10px; 
         }
 
         .nav-menu li a { 
             display: block; 
             color: var(--text-dim); 
-            padding: 8px 12px; 
+            padding: 8px 16px; 
             border-radius: 8px; 
             text-decoration: none; 
-            font-size: 0.75rem; 
+            font-size: 0.8rem; 
             cursor: pointer; 
-            white-space: nowrap;
             transition: 0.3s;
         }
         .nav-menu li a.active { background: rgba(204, 255, 0, 0.1); color: var(--acid-green); }
@@ -121,8 +118,6 @@
         .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); z-index: 1000; display: none; justify-content: center; align-items: center; padding: 20px; }
         .modal-overlay.active { display: flex; }
         .modal { background: var(--bg-panel); border: 1px solid var(--border-glass); border-radius: 16px; width: 100%; max-width: 550px; max-height: 90vh; overflow-y: auto; padding: 25px; }
-        
-        .input-dark { width: 100%; padding: 12px; background: #000; border: 1px solid var(--border-glass); color: #fff; border-radius: 8px; margin-bottom: 10px; font-family: inherit; }
 
         /* DESKTOP ADJUSTMENTS */
         @media (min-width: 768px) {
@@ -134,7 +129,6 @@
             .main-content { padding: 40px; }
             .stats-grid { grid-template-columns: repeat(3, 1fr); }
             .table-controls { flex-direction: row; justify-content: space-between; }
-            #form-add-product { flex-direction: row; }
         }
     </style>
 </head>
@@ -144,7 +138,6 @@
         <div class="logo">HYPE<span>.</span> OS</div>
         <ul class="nav-menu">
             <li><a onclick="switchTab('orders')" id="nav-orders" class="active">Vendas</a></li>
-            <li><a onclick="switchTab('products')" id="nav-products">Catálogo</a></li>
             <li><a onclick="switchTab('clients')" id="nav-clients">Logística</a></li>
         </ul>
     </aside>
@@ -163,7 +156,7 @@
                     <button class="filter-btn" onclick="filterOrders('pago', this)">Pagos</button>
                     <button class="filter-btn" onclick="filterOrders('pendente', this)">Pendentes</button>
                 </div>
-                <button onclick="clearAllOrders()" class="filter-btn" style="color: var(--danger-red); border-color: rgba(255,51,51,0.2);">Limpar Tudo</button>
+                <button onclick="clearAllOrders()" class="filter-btn" style="color: var(--danger-red); border-color: rgba(255,51,51,0.2);">Limpar Banco</button>
             </div>
 
             <div class="table-wrapper">
@@ -179,23 +172,6 @@
                         </tr>
                     </thead>
                     <tbody id="orders-table-body"></tbody>
-                </table>
-            </div>
-        </section>
-
-        <section id="section-products" class="content-section">
-            <h1 style="margin-bottom: 20px; font-family: var(--font-display); font-size: 1.2rem;">Gerenciar Catálogo</h1>
-            <div style="background: var(--bg-card); padding: 20px; border-radius: 12px; margin-bottom: 30px; border: 1px solid var(--border-glass);">
-                <form id="form-add-product" style="display: flex; flex-direction: column; gap: 10px;">
-                    <input type="text" id="prod-name" class="input-dark" placeholder="Nome da Peça" required>
-                    <input type="number" id="prod-price" class="input-dark" placeholder="Preço (ex: 150.00)" step="0.01" required>
-                    <button type="submit" class="filter-btn active" style="padding: 12px;">Adicionar Peça</button>
-                </form>
-            </div>
-            <div class="table-wrapper">
-                <table>
-                    <thead><tr><th>Peça</th><th>Preço</th><th>Ação</th></tr></thead>
-                    <tbody id="products-table-body"></tbody>
                 </table>
             </div>
         </section>
@@ -226,7 +202,7 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getFirestore, collection, onSnapshot, query, orderBy, doc, updateDoc, addDoc, deleteDoc, writeBatch, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getFirestore, collection, onSnapshot, query, orderBy, doc, updateDoc, writeBatch, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyDTc82lRFwmkn0zbNpXyBTIpeXM5WcdOfY",
@@ -245,14 +221,14 @@
         let currentFilter = 'todos';
         let ordersData = [];
 
-        // NAVEGAÇÃO
         window.switchTab = (tab) => {
             document.querySelectorAll('.content-section, .nav-menu a').forEach(el => el.classList.remove('active'));
-            document.getElementById('section-'+tab).classList.add('active');
-            document.getElementById('nav-'+tab).classList.add('active');
+            const section = document.getElementById('section-'+tab);
+            const nav = document.getElementById('nav-'+tab);
+            if(section) section.classList.add('active');
+            if(nav) nav.classList.add('active');
         };
 
-        // FILTROS
         window.filterOrders = (status, btn) => {
             currentFilter = status;
             document.querySelectorAll('.filter-group .filter-btn').forEach(b => b.classList.remove('active'));
@@ -260,7 +236,6 @@
             renderOrders();
         };
 
-        // REAL-TIME ORDERS
         onSnapshot(query(collection(db, "pedidos"), orderBy("createdAt", "desc")), (snap) => {
             ordersData = snap.docs.map(d => ({ id: d.id, ...d.data() }));
             updateStats();
@@ -319,17 +294,17 @@
 
         window.closeModal = () => document.getElementById('order-modal').classList.remove('active');
 
-        // LIMPAR TUDO
         window.clearAllOrders = async () => {
-            if (confirm("⚠️ ATENÇÃO: Isso apagará TODOS os pedidos do banco de dados. Digite 'DELETAR' para confirmar.") && prompt("Confirme a ação:") === 'DELETAR') {
-                const batch = writeBatch(db);
-                const snap = await getDocs(collection(db, "pedidos"));
-                snap.forEach(d => batch.delete(d.ref));
-                await batch.commit();
+            if (confirm("⚠️ APAGAR TUDO? Digite 'DELETAR' para confirmar.")) {
+                if(prompt("Confirmação de segurança:") === 'DELETAR') {
+                    const batch = writeBatch(db);
+                    const snap = await getDocs(collection(db, "pedidos"));
+                    snap.forEach(d => batch.delete(d.ref));
+                    await batch.commit();
+                }
             }
         };
 
-        // LOGÍSTICA
         function renderLogistics() {
             const map = {};
             ordersData.filter(o => o.status === 'pago').forEach(o => {
@@ -342,32 +317,6 @@
                 <tr><td>${city}</td><td>${data.count}</td><td>${fmt(data.total)}</td></tr>
             `).join('');
         }
-
-        // PRODUTOS
-        onSnapshot(collection(db, "produtos"), (snap) => {
-            document.getElementById('products-table-body').innerHTML = snap.docs.map(d => `
-                <tr>
-                    <td>${d.data().nome}</td>
-                    <td>${fmt(d.data().preco)}</td>
-                    <td><button onclick="deleteProd('${d.id}')" style="color:var(--danger-red); background:none; border:none; cursor:pointer; font-size:0.75rem">Remover</button></td>
-                </tr>
-            `).join('');
-        });
-
-        window.deleteProd = (id) => {
-            if(confirm("Remover este produto?")) deleteDoc(doc(db, "produtos", id));
-        };
-
-        document.getElementById('form-add-product').onsubmit = async (e) => {
-            e.preventDefault();
-            const nome = document.getElementById('prod-name').value;
-            const preco = parseFloat(document.getElementById('prod-price').value);
-            
-            if(nome && preco) {
-                await addDoc(collection(db, "produtos"), { nome, preco });
-                e.target.reset();
-            }
-        };
     </script>
 </body>
 </html>
