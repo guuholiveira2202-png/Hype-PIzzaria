@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HYPE</title>
+    <title>HYPE STORE</title>
 <style>
-       /* ========================
+     /* ========================
            VARIÁVEIS ULTRA-MODERNAS
            ======================== */
         :root {
@@ -316,308 +316,174 @@
             .quick-select-btn { padding: 10px 15px; font-size: 0.6rem; }
         }
     </style>
-
-
-   
+    </head>
 <body>
 
     <div class="marquee-container">
         <div class="marquee-content">
-            PRIVATE SALE LIBERADA // ACESSO ANTECIPADO • FRETE GRÁTIS ACIMA DE R$ 400 • NOVOS DROPS TODA SEXTA • PRIVATE SALE LIBERADA // ACESSO ANTECIPADO • FRETE GRÁTIS ACIMA DE R$ 400 • 
+            /// FRETE GRÁTIS ACIMA DE R$300 /// NOVOS DROP DISPONÍVEIS /// PAGAMENTO EM ATÉ 12X /// HYPE STORE /// FRETE GRÁTIS ACIMA DE R$300 /// NOVOS DROP DISPONÍVEIS /// PAGAMENTO EM ATÉ 12X /// HYPE STORE ///
         </div>
     </div>
 
+    <div id="overlay" class="overlay"></div>
+
     <header>
-        <div class="logo">HYPE<span>.</span></div>
+        <div class="logo">HYPE<span>STORE</span></div>
         <nav>
             <ul>
-                <li><a href="#promo-especial" class="nav-promo">Private Sale</a></li>
-                <li><a href="#promo-normal" class="nav-promo">Promoções</a></li>
                 <li><a href="#camisas">Camisas</a></li>
                 <li><a href="#moletons">Moletons</a></li>
                 <li><a href="#calcas">Calças</a></li>
-                <li><a href="#perfumes">Perfumes</a></li>
+                <li><a href="#promocoes" class="nav-promo">Promoções</a></li>
             </ul>
         </nav>
-        <div style="display: flex; gap: 10px;">
-            <button class="cart-btn" id="open-login" style="background: transparent; color: var(--text-light); border: 1px solid var(--border-glass);">LOGIN</button>
-            <button class="cart-btn" id="open-cart">SACOLA <span class="cart-count" id="count">0</span></button>
+        <div class="header-actions">
+            <button id="open-login" class="cart-btn">LOGIN</button>
+            <button id="open-cart" class="cart-btn">
+                SACOLA <span id="count" class="cart-count">0</span>
+            </button>
         </div>
     </header>
 
-    <div class="quick-select-tab" id="quick-tab">
-        <a href="#promo-especial" class="quick-select-btn active">VIP</a>
-        <a href="#promo-normal" class="quick-select-btn">PROMO</a>
-        <a href="#camisas" class="quick-select-btn">CAMISAS</a>
-        <a href="#moletons" class="quick-select-btn">MOLETONS</a>
-        <a href="#calcas" class="quick-select-btn">CALÇAS</a>
-        <a href="#perfumes" class="quick-select-btn">PERFUMES</a>
+    <section id="hero" class="hero">
+        <div class="hero-content">
+            <h1>NEW COLLECTION</h1>
+            <p>OFERTAS EXCLUSIVAS PARA MEMBROS COM AS ÚLTIMAS TENDÊNCIAS DO STREETWEAR GLOBAL.</p>
+            <a href="#camisas" class="glow-btn">VER COLEÇÃO</a>
+        </div>
+    </section>
+
+    <main class="store">
+        <section id="camisas" class="category-section">
+            <h2 class="category-title">01 <span>Camisas</span></h2>
+            <div class="grid">
+                <p style="color: var(--text-dim);">Carregando produtos...</p>
+            </div>
+        </section>
+
+        <section id="moletons" class="category-section">
+            <h2 class="category-title">02 <span>Moletons</span></h2>
+            <div class="grid"></div>
+        </section>
+
+        <section id="calcas" class="category-section">
+            <h2 class="category-title">03 <span>Calças</span></h2>
+            <div class="grid"></div>
+        </section>
+        
+        <section id="perfumes" class="category-section">
+            <h2 class="category-title">04 <span>Perfumes</span></h2>
+            <div class="grid"></div>
+        </section>
+
+        <section id="promocoes" class="category-section special-section">
+            <h2 class="category-title special-title">SALE <span>Promoções</span></h2>
+            <div class="grid"></div>
+        </section>
+    </main>
+
+    <div class="quick-select-tab">
+        <a href="#hero" class="quick-select-btn active">Início</a>
+        <a href="#camisas" class="quick-select-btn">Camisas</a>
+        <a href="#moletons" class="quick-select-btn">Moletons</a>
+        <a href="#calcas" class="quick-select-btn">Calças</a>
+        <a href="#perfumes" class="quick-select-btn">Perfumes</a>
+        <a href="#promocoes" class="quick-select-btn" style="color: var(--acid-green);">Sale</a>
     </div>
 
-    <section class="hero" id="hero">
-        <div class="hero-content">
-            <h1>SEASON<br>OFFLINE</h1>
-            <p>Liquidação de arquivo. Peças selecionadas com até 50% de desconto por tempo limitado. Brutalismo digital encontra o streetwear ultra-moderno.</p>
-            <a href="#promo-especial" class="glow-btn">VER PROMOÇÕES</a>
-        </div>
-    </section>
-
-    <section class="store" id="store">
-        
-        <div class="category-section special-section" id="promo-especial">
-            <h2 class="category-title special-title">PRIVATE SALE <span>// VIP</span></h2>
-            <div class="grid">
-                <div class="card card-special">
-                    <div class="badge-vip">EXCLUSIVE ACCESS</div>
-                    <div class="card-img">
-                        <span class="price-tag"><span class="price-old">R$ 599</span> <span class="price-new">R$ 299,00</span></span>
-                        <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=600&q=80" alt="Special">
-                    </div>
-                    <div class="card-info">
-                        <h3> Tech Jacket</h3><p>Limited Edition / A prova de agua</p>
-                        <div class="sizes"><button class="size-btn">M</button><button class="size-btn">G</button></div>
-                        <button class="add-btn" data-name="Tech Jacket" data-price="299.00" data-img="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=200&q=80">Adicionar</button>
-                    </div>
-                </div>
-                <div class="card card-special">
-                    <div class="badge-vip">LAST PIECE</div>
-                    <div class="card-img">
-                        <span class="price-tag"><span class="price-old">R$ 450</span> <span class="price-new">R$ 215,00</span></span>
-                        <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=600&q=80" alt="Special">
-                    </div>
-                    <div class="card-info">
-                        <h3>Jaqueta de Couro Cibernetico</h3><p>Handmade / Vegan Leather</p>
-                        <div class="sizes"><button class="size-btn">P</button><button class="size-btn">M</button></div>
-                        <button class="add-btn" data-name="Jaqueta de Couro Cibernetico" data-price="215.00" data-img="https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=200&q=80">Adicionar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="category-section" id="promo-normal">
-            <h2 class="category-title">PROMOÇÕES <span>// OFF</span></h2>
-            <div class="grid">
-                <div class="card">
-                    <div class="card-img">
-                        <span class="price-tag"><span class="price-old">R$ 180</span> <span class="price-new">R$ 89,00</span></span>
-                        <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=600&q=80" alt="Promo">
-                    </div>
-                    <div class="card-info">
-                        <h3>Camisa Basica Com Logo</h3><p>White / Essential Line</p>
-                        <div class="sizes"><button class="size-btn">P</button><button class="size-btn">M</button><button class="size-btn">G</button></div>
-                        <button class="add-btn" data-name="Camisa Basica Com Logo" data-price="89.00" data-img="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=200&q=80">Adicionar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="category-section" id="camisas">
-            <h2 class="category-title">CAMISAS <span>// 01</span></h2>
-            <div class="grid">
-                <div class="card">
-                    <div class="card-img"><span class="price-tag">R$ 159,00</span><img src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=600&q=80" alt="Camisa"></div>
-                    <div class="card-info">
-                        <h3>Camisa Box Preta</h3><p>Washed Black / 100% Algodão</p>
-                        <div class="sizes"><button class="size-btn">P</button><button class="size-btn">M</button><button class="size-btn">G</button><button class="size-btn">GG</button></div>
-                        <button class="add-btn" data-name="Camisa Box Preta" data-price="159.00" data-img="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=200&q=80">Adicionar</button>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-img"><span class="price-tag">R$ 179,00</span><img src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&w=600&q=80" alt="Camisa Estampada"></div>
-                    <div class="card-info">
-                        <h3>Camisa Grafica Futurista</h3><p>Estampa Digital Premium</p>
-                        <div class="sizes"><button class="size-btn">M</button><button class="size-btn">G</button><button class="size-btn">GG</button></div>
-                        <button class="add-btn" data-name="Camisa Grafica Futurista" data-price="179.00" data-img="https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&w=200&q=80">Adicionar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="category-section" id="moletons">
-            <h2 class="category-title">MOLETONS <span>// 02</span></h2>
-            <div class="grid">
-                <div class="card">
-                    <div class="card-img"><span class="price-tag">R$ 329,00</span><img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=600&q=80" alt="Moletom"></div>
-                    <div class="card-info">
-                        <h3>Moletom Oversized Com Capuz </h3><p>Fleece Premium / Costura Dupla</p>
-                        <div class="sizes"><button class="size-btn">P</button><button class="size-btn">M</button><button class="size-btn">G</button><button class="size-btn">GG</button></div>
-                        <button class="add-btn" data-name="Moletom Oversized Com Capuz " data-price="329.00" data-img="https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=200&q=80">Adicionar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="category-section" id="calcas">
-            <h2 class="category-title">CALÇAS <span>// 03</span></h2>
-            <div class="grid">
-                <div class="card">
-                    <div class="card-img"><span class="price-tag">R$ 289,00</span><img src="https://images.unsplash.com/photo-1523398002811-999aa8d9511e?auto=format&fit=crop&w=600&q=80" alt="Calça"></div>
-                    <div class="card-info">
-                        <h3>Calça Cargo Tatica </h3><p>Nylon / Modelagem Relaxed</p>
-                        <div class="sizes"><button class="size-btn">38</button><button class="size-btn">40</button><button class="size-btn">42</button><button class="size-btn">44</button></div>
-                        <button class="add-btn" data-name="Calça Cargo Tatica" data-price="289.00" data-img="https://images.unsplash.com/photo-1523398002811-999aa8d9511e?auto=format&fit=crop&w=200&q=80">Adicionar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="category-section" id="perfumes">
-            <h2 class="category-title">PERFUMES <span>// 04</span></h2>
-            <div class="grid">
-                <div class="card">
-                    <div class="card-img">
-                        <span class="price-tag">R$ 450,00</span>
-                        <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=600&q=80" alt="Perfume Cyber Void">
-                    </div>
-                    <div class="card-info">
-                        <h3>Cyber Void - Eau de Parfum</h3>
-                        <p>Amadeirado / Notas de Metal Frio</p>
-                        <div class="sizes">
-                            <button class="size-btn">50ml</button>
-                            <button class="size-btn">100ml</button>
-                        </div>
-                        <button class="add-btn" data-name="Cyber Void - EDP" data-price="450.00" data-img="https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=200&q=80">Adicionar</button>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-img">
-                        <span class="price-tag">R$ 520,00</span>
-                        <img src="https://images.unsplash.com/photo-1523293115678-d2900e5ce8eb?auto=format&fit=crop&w=600&q=80" alt="Perfume Neon Elixir">
-                    </div>
-                    <div class="card-info">
-                        <h3>Neon Elixir</h3>
-                        <p>Cítrico / Unissex Exclusivo</p>
-                        <div class="sizes">
-                            <button class="size-btn">50ml</button>
-                            <button class="size-btn">100ml</button>
-                        </div>
-                        <button class="add-btn" data-name="Neon Elixir" data-price="520.00" data-img="https://images.unsplash.com/photo-1523293115678-d2900e5ce8eb?auto=format&fit=crop&w=200&q=80">Adicionar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </section>
-
-    <div class="overlay" id="overlay"></div>
-
-    <aside class="sidebar" id="sidebar">
+    <div id="sidebar" class="sidebar">
         <div class="cart-header">
             <h2>SUA SACOLA</h2>
-            <button class="close-btn" id="close-cart">&times;</button>
+            <button id="close-cart" class="close-btn">×</button>
         </div>
         
-        <div class="cart-items" id="cart-list"></div>
+        <div id="cart-list" class="cart-items"></div>
         
-        <div class="cep-container">
-            <label for="cep-input">CALCULAR FRETE</label>
-            <div class="cep-input-group">
-                <input type="text" id="cep-input" placeholder="00000-000" maxlength="9">
-                <button id="btn-calc-cep">OK</button>
-            </div>
-            <div id="cep-result" class="cep-result"></div>
-        </div>
-
         <div class="cart-footer">
-            <div class="summary-row">
-                <span>Subtotal</span>
-                <strong id="subtotal-price">R$ 0,00</strong>
-            </div>
-            <div class="summary-row">
-                <span>Frete</span>
-                <strong id="shipping-price">R$ 0,00</strong>
-            </div>
-            <div class="summary-row summary-total">
-                <span>Total</span>
-                <strong id="total-price">R$ 0,00</strong>
-            </div>
-            <button class="checkout-btn" id="btn-open-payment">FINALIZAR COMPRA</button>
-        </div>
-    </aside>
-
-    <div class="payment-modal" id="login-modal">
-        <div class="payment-header">
-            <h2>IDENTIFICAÇÃO</h2>
-            <button class="close-btn" id="close-login">&times;</button>
-        </div>
-        
-        <div class="form-area" style="display: block; margin-top: 20px;">
-            <p style="color: var(--text-dim); margin-bottom: 20px; font-size: 0.9rem;">Insira seus dados para acompanhar seus pedidos e acessar ofertas exclusivas.</p>
-            <div class="input-group">
-                <label>E-mail (Gmail)</label>
-                <input type="email" id="login-email" placeholder="seuemail@gmail.com">
-            </div>
-            <div class="input-group">
-                <label>WhatsApp</label>
-                <input type="text" id="login-whatsapp" placeholder="(00) 00000-0000" maxlength="15">
+            <div class="cep-container">
+                <label for="cep-input">Calcular Frete</label>
+                <div class="cep-input-group">
+                    <input type="text" id="cep-input" placeholder="00000-000" maxlength="9">
+                    <button id="btn-calc-cep">OK</button>
+                </div>
+                <div id="cep-result" class="cep-result"></div>
             </div>
             
-            <div id="login-error" class="error-message"></div>
+            <div class="summary-row"><span>Subtotal</span> <strong id="subtotal-price">R$ 0,00</strong></div>
+            <div class="summary-row"><span>Frete</span> <strong id="shipping-price">R$ 0,00</strong></div>
+            <div class="summary-row summary-total"><span>Total</span> <strong id="total-price">R$ 0,00</strong></div>
             
-            <button class="final-pay-btn" id="btn-submit-login">ENTRAR / CADASTRAR</button>
+            <button id="btn-open-payment" class="checkout-btn">FINALIZAR COMPRA</button>
         </div>
     </div>
 
-    <div class="payment-modal" id="payment-modal">
+    <div id="login-modal" class="payment-modal">
         <div class="payment-header">
-            <h2>CHECKOUT</h2>
-            <button class="close-btn" id="close-payment">&times;</button>
+            <h2>LOGIN / CADASTRO</h2>
+            <button id="close-login" class="close-btn">×</button>
+        </div>
+        <p style="font-size: 0.8rem; color: var(--text-dim); margin-bottom: 25px; text-align:center;">Conecte-se para salvar seus pedidos e agilizar o checkout.</p>
+        
+        <div class="input-group">
+            <label>E-MAIL</label>
+            <input type="email" id="login-email" placeholder="seu@email.com">
+        </div>
+        <div class="input-group">
+            <label>WHATSAPP</label>
+            <input type="text" id="login-whatsapp" placeholder="(00) 00000-0000" maxlength="15">
         </div>
         
-        <h3 class="section-title">1. ENDEREÇO DE ENTREGA</h3>
+        <div id="login-error" class="error-message"></div>
+        <button id="btn-submit-login" class="final-pay-btn">ENTRAR NA CONTA</button>
+    </div>
+
+    <div id="payment-modal" class="payment-modal">
+        <div class="payment-header">
+            <h2>CHECKOUT</h2>
+            <button id="close-payment" class="close-btn">×</button>
+        </div>
+
         <div class="address-area">
+            <h3 class="section-title">Endereço de Entrega</h3>
             <div class="row">
                 <div class="input-group" style="flex: 2;">
-                    <label>Rua / Avenida</label>
-                    <input type="text" id="address-street" placeholder="Nome da rua">
+                    <label>RUA / AVENIDA</label>
+                    <input type="text" id="address-street">
                 </div>
                 <div class="input-group" style="flex: 1;">
-                    <label>Número</label>
-                    <input type="text" id="address-number" placeholder="123">
+                    <label>NÚMERO</label>
+                    <input type="text" id="address-number">
                 </div>
             </div>
-            <div class="row">
-                <div class="input-group" style="flex: 1;">
-                    <label>Bairro</label>
-                    <input type="text" id="address-neighborhood" placeholder="Bairro">
-                </div>
-                <div class="input-group" style="flex: 1;">
-                    <label>Complemento</label>
-                    <input type="text" id="address-complement" placeholder="Apto, Bloco...">
-                </div>
+            <div class="input-group">
+                <label>COMPLEMENTO</label>
+                <input type="text" id="address-complement" placeholder="OPCIONAL">
             </div>
             <div class="row">
-                <div class="input-group" style="flex: 2;">
-                    <label>Cidade</label>
-                    <input type="text" id="address-city" readonly style="background: rgba(255,255,255,0.05); color: var(--text-dim);">
-                </div>
-                <div class="input-group" style="flex: 1;">
-                    <label>UF</label>
-                    <input type="text" id="address-uf" readonly style="background: rgba(255,255,255,0.05); color: var(--text-dim);">
-                </div>
+                <div class="input-group"><label>BAIRRO</label><input type="text" id="address-neighborhood" readonly></div>
+                <div class="input-group"><label>CIDADE</label><input type="text" id="address-city" readonly></div>
+                <div class="input-group"><label>UF</label><input type="text" id="address-uf" readonly></div>
             </div>
         </div>
 
-        <h3 class="section-title">2. MÉTODO DE PAGAMENTO</h3>
+        <h3 class="section-title">Forma de Pagamento</h3>
         <div class="payment-methods">
-            <button class="method-btn active" data-target="card-form">CRÉDITO</button>
-            <button class="method-btn" data-target="card-form">DÉBITO</button>
+            <button class="method-btn active" data-target="card-form">CARTÃO</button>
             <button class="method-btn" data-target="pix-form">PIX</button>
         </div>
 
         <div id="card-form" class="form-area">
             <div class="input-group">
-                <label>Número do Cartão</label>
+                <label>NÚMERO DO CARTÃO</label>
                 <input type="text" id="card-number" placeholder="0000 0000 0000 0000" maxlength="19">
             </div>
             <div class="input-group">
-                <label>Nome do Titular</label>
-                <input type="text" id="card-name" placeholder="NOME IMPRESSO NO CARTÃO" style="text-transform: uppercase;">
+                <label>NOME IMPRESSO NO CARTÃO</label>
+                <input type="text" id="card-name" placeholder="NOME DO TITULAR">
             </div>
             <div class="row">
                 <div class="input-group">
-                    <label>Validade</label>
+                    <label>VALIDADE</label>
                     <input type="text" id="card-expiry" placeholder="MM/AA" maxlength="5">
                 </div>
                 <div class="input-group">
@@ -627,36 +493,33 @@
             </div>
         </div>
 
-        <div id="pix-form" class="form-area pix-area">
-            <div class="qr-placeholder">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=HYPE-STORE-PAGAMENTO" alt="QR Code PIX">
-            </div>
-            <p style="color: var(--text-dim); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">Escaneie com o app do seu banco</p>
-            
+        <div id="pix-form" class="form-area pix-area" style="display: none;">
+            <p style="font-size: 0.8rem; color: var(--text-dim); margin-bottom: 15px;">Chave PIX: <strong style="color: var(--text-light);">contato@hypestore.com</strong></p>
             <div class="upload-area">
-                <label for="pix-receipt" class="upload-btn" id="upload-label">
+                <label id="upload-label" class="upload-btn" for="pix-receipt">
                     <span id="upload-text">ANEXAR COMPROVANTE (IMG/PDF)</span>
                 </label>
                 <input type="file" id="pix-receipt" accept="image/*,application/pdf" style="display: none;">
             </div>
         </div>
 
-        <div id="global-error" class="error-message"></div>
+        <div class="summary-total" style="border-top: none; padding-top: 0; margin-top: 15px;">
+            <span>TOTAL A PAGAR:</span> <strong id="modal-total-display">R$ 0,00</strong>
+        </div>
 
-        <button class="final-pay-btn" id="btn-process-payment">PAGAR <span id="modal-total-display"></span></button>
+        <div id="global-error" class="error-message"></div>
+        <button id="btn-process-payment" class="final-pay-btn">FINALIZAR PEDIDO</button>
     </div>
 
-    <footer>&copy; 2026 HYPE. SYSTEM ARCHIVE. ITAPEVI/SP.</footer>
+    <footer>
+        <p>&copy; 2026 HYPE STORE. TODOS OS DIREITOS RESERVADOS.</p>
+    </footer>
 
-    <script type="module">
-        // ==========================
-        // CONFIGURAÇÃO DO FIREBASE (UNIFICADA)
-        // ==========================
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
-        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
+    <script>
+        // Configuração do seu Banco de Dados
         const firebaseConfig = {
             apiKey: "AIzaSyDTc82lRFwmkn0zbNpXyBTIpeXM5WcdOfY",
             authDomain: "loja-de-roupa-59097.firebaseapp.com",
@@ -667,21 +530,15 @@
             measurementId: "G-XP1EYC4ZED"
         };
 
-        const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
-        const dbFirestore = getFirestore(app);
-        const dbRealtime = getDatabase(app); 
+        // Inicializa Firebase e Firestore
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
 
-        // ==========================
-        // VARIÁVEIS GERAIS E ESTADO
-        // ==========================
+        // Variáveis de Interface e Carrinho
         const formatCurrency = (value) => value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-
         let cart = JSON.parse(localStorage.getItem('hype_db_cart')) || [];
         let shippingCost = 0;
         let lastCepData = null; 
-        
-        // Verifica se o usuário já fez login na sessão anterior
         let currentUser = JSON.parse(localStorage.getItem('hype_logged_user')) || null;
 
         const sidebar = document.getElementById('sidebar');
@@ -695,9 +552,7 @@
 
         function saveCartToLocal() { localStorage.setItem('hype_db_cart', JSON.stringify(cart)); }
 
-        // ==========================
-        // SISTEMA DE LOGIN
-        // ==========================
+        // ================= SISTEMA DE LOGIN =================
         const loginModal = document.getElementById('login-modal');
         const btnOpenLogin = document.getElementById('open-login');
         const btnCloseLogin = document.getElementById('close-login');
@@ -706,195 +561,120 @@
         const btnSubmitLogin = document.getElementById('btn-submit-login');
         const loginError = document.getElementById('login-error');
 
-        // Atualiza a UI se o usuário já estiver logado
         if (currentUser) {
-            btnOpenLogin.textContent = "CONECTADO";
+            btnOpenLogin.innerHTML = "CONECTADO";
             btnOpenLogin.style.color = "var(--acid-green)";
             btnOpenLogin.style.borderColor = "var(--acid-green)";
         }
 
-        // Máscara WhatsApp: (00) 00000-0000
-        inputLoginWa.addEventListener('input', (e) => {
-            let v = e.target.value.replace(/\D/g, "");
-            v = v.replace(/^(\d{2})(\d)/g, "($1) $2");
-            v = v.replace(/(\d)(\d{4})$/, "$1-$2");
-            e.target.value = v;
-        });
+        if(inputLoginWa) {
+            inputLoginWa.addEventListener('input', (e) => {
+                let v = e.target.value.replace(/\D/g, "");
+                v = v.replace(/^(\d{2})(\d)/g, "($1) $2");
+                v = v.replace(/(\d)(\d{4})$/, "$1-$2");
+                e.target.value = v;
+            });
+        }
 
-        // Abrir/Fechar Modal de Login
-        btnOpenLogin.addEventListener('click', () => {
-            if(currentUser) {
-                // Se já logado, pode implementar uma opção de "Sair" aqui se desejar
-                alert(`Conectado como: ${currentUser.email}\nWhatsApp: ${currentUser.whatsapp}`);
-                return;
-            }
-            sidebar.classList.remove('open');
-            document.getElementById('payment-modal').classList.remove('active');
-            loginModal.classList.add('active');
-            overlay.classList.add('active');
-        });
+        if(btnOpenLogin) {
+            btnOpenLogin.addEventListener('click', () => {
+                if(currentUser) {
+                    alert(`Conectado como: ${currentUser.email}\nWhatsApp: ${currentUser.whatsapp}`);
+                    return;
+                }
+                sidebar.classList.remove('open');
+                document.getElementById('payment-modal').classList.remove('active');
+                loginModal.classList.add('active');
+                overlay.classList.add('active');
+            });
+        }
 
-        btnCloseLogin.addEventListener('click', () => {
-            loginModal.classList.remove('active');
-            overlay.classList.remove('active');
-        });
+        if(btnCloseLogin) btnCloseLogin.addEventListener('click', () => { loginModal.classList.remove('active'); overlay.classList.remove('active'); });
 
-        // Processar Login / Cadastro
-        btnSubmitLogin.addEventListener('click', async () => {
-            loginError.textContent = "";
-            const email = inputLoginEmail.value.trim();
-            const wa = inputLoginWa.value.trim();
+        if(btnSubmitLogin) {
+            btnSubmitLogin.addEventListener('click', () => {
+                loginError.textContent = "";
+                const email = inputLoginEmail.value.trim();
+                const wa = inputLoginWa.value.trim();
 
-            if (!email.includes('@') || wa.length < 14) {
-                loginError.textContent = "Preencha um E-mail válido e o WhatsApp completo.";
-                return;
-            }
+                if (!email.includes('@') || wa.length < 14) {
+                    loginError.textContent = "Preencha um e-mail válido e o WhatsApp completo.";
+                    return;
+                }
 
-            const ogText = btnSubmitLogin.innerHTML;
-            btnSubmitLogin.innerHTML = "PROCESSANDO...";
-            btnSubmitLogin.style.opacity = "0.5";
-            btnSubmitLogin.style.pointerEvents = "none";
+                const ogText = btnSubmitLogin.innerHTML;
+                btnSubmitLogin.innerHTML = "PROCESSANDO...";
+                btnSubmitLogin.style.opacity = "0.5";
+                btnSubmitLogin.style.pointerEvents = "none";
 
-            try {
-                // Salva o cliente na coleção "clientes" no Firebase
-                await addDoc(collection(dbFirestore, "clientes"), {
-                    email: email,
-                    whatsapp: wa,
-                    createdAt: serverTimestamp()
-                });
+                // Salva no Firestore (v8)
+                db.collection("clientes").add({ 
+                    email: email, 
+                    whatsapp: wa, 
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp() 
+                }).then(() => {
+                    currentUser = { email: email, whatsapp: wa };
+                    localStorage.setItem('hype_logged_user', JSON.stringify(currentUser));
 
-                currentUser = { email: email, whatsapp: wa };
-                localStorage.setItem('hype_logged_user', JSON.stringify(currentUser));
+                    btnSubmitLogin.innerHTML = "CONECTADO!";
+                    btnSubmitLogin.style.background = "var(--acid-green)";
+                    btnSubmitLogin.style.color = "#000";
 
-                btnSubmitLogin.innerHTML = "CONECTADO!";
-                btnSubmitLogin.style.background = "var(--acid-green)";
-                btnSubmitLogin.style.color = "#000";
-
-                setTimeout(() => {
-                    loginModal.classList.remove('active');
-                    overlay.classList.remove('active');
-                    btnOpenLogin.textContent = "CONECTADO";
-                    btnOpenLogin.style.color = "var(--acid-green)";
-                    btnOpenLogin.style.borderColor = "var(--acid-green)";
-                    
+                    setTimeout(() => {
+                        loginModal.classList.remove('active');
+                        overlay.classList.remove('active');
+                        btnOpenLogin.innerHTML = "CONECTADO";
+                        btnOpenLogin.style.color = "var(--acid-green)";
+                        btnOpenLogin.style.borderColor = "var(--acid-green)";
+                        
+                        btnSubmitLogin.innerHTML = ogText;
+                        btnSubmitLogin.style.background = "var(--text-light)";
+                        btnSubmitLogin.style.opacity = "1";
+                        btnSubmitLogin.style.pointerEvents = "auto";
+                    }, 1000);
+                }).catch((error) => {
+                    console.error("Erro no login:", error);
+                    loginError.textContent = "Erro ao conectar. Tente novamente.";
                     btnSubmitLogin.innerHTML = ogText;
-                    btnSubmitLogin.style.background = "var(--text-light)";
                     btnSubmitLogin.style.opacity = "1";
                     btnSubmitLogin.style.pointerEvents = "auto";
-                }, 1000);
+                });
+            });
+        }
 
-            } catch (error) {
-                console.error("Erro ao salvar cliente: ", error);
-                loginError.textContent = "Erro ao conectar. Tente novamente.";
-                btnSubmitLogin.innerHTML = ogText;
-                btnSubmitLogin.style.opacity = "1";
-                btnSubmitLogin.style.pointerEvents = "auto";
-            }
-        });
-
-
-        // ==========================
-        // OBSERVER DA ABA DE SELEÇÃO RÁPIDA
-        // ==========================
+        // ================= ABA FLUTUANTE (MENU) =================
         const sections = document.querySelectorAll('.category-section, #hero');
         const quickSelectBtns = document.querySelectorAll('.quick-select-btn');
-
-        const observerOptions = {
-            root: null,
-            rootMargin: '-20% 0px -60% 0px',
-            threshold: 0
-        };
-
         const sectionObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if(entry.isIntersecting) {
                     quickSelectBtns.forEach(btn => {
                         btn.classList.remove('active');
-                        if(btn.getAttribute('href') === '#' + entry.target.id) {
-                            btn.classList.add('active');
-                        }
+                        if(btn.getAttribute('href') === '#' + entry.target.id) btn.classList.add('active');
                     });
                 }
             });
-        }, observerOptions);
-
+        }, { root: null, rootMargin: '-20% 0px -60% 0px', threshold: 0 });
         sections.forEach(sec => sectionObserver.observe(sec));
 
-        // ==========================
-        // LÓGICA DE SELEÇÃO E SACOLA
-        // ==========================
+        // ================= SISTEMA DE SACOLA =================
         document.addEventListener('click', e => {
             if(e.target.classList.contains('size-btn')) {
                 const parent = e.target.parentElement;
                 parent.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
                 e.target.classList.add('selected');
             }
-        });
 
-        function toggleCart() {
-            sidebar.classList.toggle('open');
-            if(!document.getElementById('payment-modal').classList.contains('active') && !document.getElementById('login-modal').classList.contains('active')){
-                overlay.classList.toggle('active');
-            }
-        }
-
-        document.getElementById('open-cart').addEventListener('click', toggleCart);
-        document.getElementById('close-cart').addEventListener('click', toggleCart);
-        
-        overlay.addEventListener('click', () => {
-            sidebar.classList.remove('open');
-            document.getElementById('payment-modal').classList.remove('active');
-            loginModal.classList.remove('active');
-            overlay.classList.remove('active');
-        });
-
-        window.removeItem = function(index) { 
-            cart.splice(index, 1); 
-            updateCart(); 
-        }
-
-        function updateCart() {
-            cartList.innerHTML = ''; 
-            let subtotal = 0;
-            
-            if(cart.length === 0) {
-                cartList.innerHTML = '<p style="color:var(--text-dim); text-align:center; padding-top:20px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">Sua sacola está vazia.</p>';
-            } else {
-                cart.forEach((item, index) => {
-                    subtotal += item.price;
-                    cartList.innerHTML += `
-                        <div class="cart-item">
-                            <img src="${item.img}" alt="Produto">
-                            <div class="cart-info">
-                                <h4>${item.name}</h4>
-                                <span>TAMANHO: ${item.size}</span>
-                                <div class="cart-price">${formatCurrency(item.price)}</div>
-                                <button class="remove-btn" onclick="removeItem(${index})">Remover</button>
-                            </div>
-                        </div>`;
-                });
-            }
-            
-            const total = subtotal + shippingCost;
-            countUI.textContent = cart.length;
-            subtotalUI.textContent = formatCurrency(subtotal);
-            shippingUI.textContent = formatCurrency(shippingCost);
-            totalUI.textContent = formatCurrency(total);
-            modalTotalUI.textContent = formatCurrency(total);
-
-            saveCartToLocal();
-        }
-
-        document.querySelectorAll('.add-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
+            if(e.target.classList.contains('add-btn')) {
+                const btn = e.target;
                 const card = btn.closest('.card');
                 const selectedSize = card.querySelector('.size-btn.selected');
                 
                 if(!selectedSize) {
                     const ogText = btn.textContent; 
-                    btn.textContent = "SELECIONE O TAMANHO"; 
-                    btn.style.color = "#ff4444"; 
-                    btn.style.background = "transparent";
+                    btn.textContent = "SELECIONE O TAM"; 
+                    btn.style.color = "#000"; 
+                    btn.style.background = "#ff4444";
                     setTimeout(() => { btn.textContent = ogText; btn.style.color = ""; btn.style.background = ""; }, 1500);
                     return;
                 }
@@ -909,74 +689,111 @@
                 updateCart(); 
                 toggleCart(); 
                 selectedSize.classList.remove('selected');
-            });
+            }
         });
 
-        // ==========================
-        // LÓGICA DO CEP E FRETE (VIACEP)
-        // ==========================
-        const cepInput = document.getElementById('cep-input');
-        cepInput.addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, '');
-            if (value.length > 5) value = value.replace(/^(\d{5})(\d)/, '$1-$2');
-            e.target.value = value;
+        function toggleCart() {
+            sidebar.classList.toggle('open');
+            if(!document.getElementById('payment-modal').classList.contains('active') && !document.getElementById('login-modal').classList.contains('active')){
+                overlay.classList.toggle('active');
+            }
+        }
+
+        if(document.getElementById('open-cart')) document.getElementById('open-cart').addEventListener('click', toggleCart);
+        if(document.getElementById('close-cart')) document.getElementById('close-cart').addEventListener('click', toggleCart);
+        
+        overlay.addEventListener('click', () => {
+            sidebar.classList.remove('open');
+            document.getElementById('payment-modal').classList.remove('active');
+            loginModal.classList.remove('active');
+            overlay.classList.remove('active');
         });
 
-        document.getElementById('btn-calc-cep').addEventListener('click', async () => {
-            const cep = cepInput.value.replace(/\D/g, '');
-            const resultDiv = document.getElementById('cep-result');
+        window.removeItem = function(index) { cart.splice(index, 1); updateCart(); }
+
+        function updateCart() {
+            if(!cartList) return;
+            cartList.innerHTML = ''; 
+            let subtotal = 0;
             
-            if (cep.length !== 8) {
-                resultDiv.style.color = '#ff4444';
-                resultDiv.textContent = 'CEP INVÁLIDO.';
-                shippingCost = 0; lastCepData = null; updateCart(); return;
+            if(cart.length === 0) {
+                cartList.innerHTML = '<p style="color:var(--text-dim); text-align:center; padding-top:20px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">Sua sacola está vazia.</p>';
+            } else {
+                cart.forEach((item, index) => {
+                    subtotal += item.price;
+                    cartList.innerHTML += `
+                        <div class="cart-item">
+                            <img src="${item.img}" alt="Produto" style="width: 50px; border-radius: 5px;">
+                            <div class="cart-info">
+                                <h4>${item.name}</h4>
+                                <span style="font-size: 0.7rem; color: #aaa;">TAMANHO: ${item.size}</span>
+                                <div class="cart-price">${formatCurrency(item.price)}</div>
+                            </div>
+                            <button class="remove-btn" onclick="removeItem(${index})" style="background: none; border: none; color: #ff4444; cursor: pointer; font-size: 0.8rem;">REMOVER</button>
+                        </div>`;
+                });
             }
+            
+            const total = subtotal + shippingCost;
+            if(countUI) countUI.textContent = cart.length;
+            if(subtotalUI) subtotalUI.textContent = formatCurrency(subtotal);
+            if(shippingUI) shippingUI.textContent = formatCurrency(shippingCost);
+            if(totalUI) totalUI.textContent = formatCurrency(total);
+            if(modalTotalUI) modalTotalUI.textContent = formatCurrency(total);
+            saveCartToLocal();
+        }
 
-            resultDiv.style.color = 'var(--text-dim)';
-            resultDiv.textContent = 'CALCULANDO FRETE...';
+        // ================= CÁLCULO DE FRETE (VIACEP) =================
+        const cepInput = document.getElementById('cep-input');
+        if(cepInput) {
+            cepInput.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length > 5) value = value.replace(/^(\d{5})(\d)/, '$1-$2');
+                e.target.value = value;
+            });
+        }
 
-            try {
-                const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
-                const data = await response.json(); 
-
-                if (data.erro) {
-                    resultDiv.style.color = '#ff4444';
-                    resultDiv.textContent = 'CEP NÃO ENCONTRADO.';
-                    shippingCost = 0; lastCepData = null;
-                } else {
-                    lastCepData = data; 
-                    resultDiv.style.color = 'var(--acid-green)';
-                    const cidadeNormalizada = data.localidade.toLowerCase();
-                    const cidadesVizinhas = ['jandira', 'barueri', 'carapicuíba', 'osasco', 'cotia'];
-
-                    if (cidadeNormalizada === 'itapevi') {
-                        shippingCost = 0.00;
-                        resultDiv.innerHTML = `${data.localidade}/${data.uf} - FRETE GRÁTIS LOCAL`;
-                    } else if (cidadesVizinhas.includes(cidadeNormalizada)) {
-                        shippingCost = 10.00;
-                        resultDiv.innerHTML = `${data.localidade}/${data.uf} - FRETE LOCAL: ${formatCurrency(shippingCost)}`;
-                    } else if (data.uf === 'SP') {
-                        shippingCost = 18.00;
-                        resultDiv.innerHTML = `${data.localidade}/${data.uf} - ESTADUAL: ${formatCurrency(shippingCost)}`;
-                    } else if (['RJ', 'MG', 'ES', 'PR', 'SC', 'RS'].includes(data.uf)) {
-                        shippingCost = 30.00;
-                        resultDiv.innerHTML = `${data.localidade}/${data.uf} - REGIONAL: ${formatCurrency(shippingCost)}`;
-                    } else {
-                        shippingCost = 55.00;
-                        resultDiv.innerHTML = `${data.localidade}/${data.uf} - NACIONAL: ${formatCurrency(shippingCost)}`;
-                    }
+        const btnCalcCep = document.getElementById('btn-calc-cep');
+        if(btnCalcCep) {
+            btnCalcCep.addEventListener('click', async () => {
+                const cep = cepInput.value.replace(/\D/g, '');
+                const resultDiv = document.getElementById('cep-result');
+                
+                if (cep.length !== 8) {
+                    resultDiv.style.color = '#ff4444'; resultDiv.textContent = 'CEP INVÁLIDO.';
+                    shippingCost = 0; lastCepData = null; updateCart(); return;
                 }
-            } catch (error) {
-                resultDiv.style.color = '#ff4444';
-                resultDiv.textContent = 'FALHA NA CONEXÃO.';
-                shippingCost = 0; lastCepData = null;
-            }
-            updateCart();
-        });
 
-        // ==========================
-        // MÁSCARAS, UPLOAD E VALIDAÇÃO DE CARTÃO
-        // ==========================
+                resultDiv.style.color = 'var(--text-dim)'; resultDiv.textContent = 'CALCULANDO...';
+
+                try {
+                    const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+                    const data = await response.json(); 
+
+                    if (data.erro) {
+                        resultDiv.style.color = '#ff4444'; resultDiv.textContent = 'CEP NÃO ENCONTRADO.';
+                        shippingCost = 0; lastCepData = null;
+                    } else {
+                        lastCepData = data; 
+                        resultDiv.style.color = 'var(--acid-green)';
+                        const cidade = data.localidade.toLowerCase();
+                        const vizinhas = ['jandira', 'barueri', 'carapicuíba', 'osasco', 'cotia'];
+
+                        if (cidade === 'itapevi') { shippingCost = 0; resultDiv.innerHTML = `FRETE GRÁTIS LOCAL`; } 
+                        else if (vizinhas.includes(cidade)) { shippingCost = 10; resultDiv.innerHTML = `FRETE LOCAL: ${formatCurrency(shippingCost)}`; } 
+                        else if (data.uf === 'SP') { shippingCost = 18; resultDiv.innerHTML = `ESTADUAL: ${formatCurrency(shippingCost)}`; } 
+                        else if (['RJ', 'MG', 'ES', 'PR', 'SC', 'RS'].includes(data.uf)) { shippingCost = 30; resultDiv.innerHTML = `REGIONAL: ${formatCurrency(shippingCost)}`; } 
+                        else { shippingCost = 55; resultDiv.innerHTML = `NACIONAL: ${formatCurrency(shippingCost)}`; }
+                    }
+                } catch (error) {
+                    resultDiv.style.color = '#ff4444'; resultDiv.textContent = 'ERRO NO FRETE.';
+                    shippingCost = 0; lastCepData = null;
+                }
+                updateCart();
+            });
+        }
+
+        // ================= VALIDAÇÕES DE FORMULÁRIO (CARTÃO/PIX) =================
         const pixReceiptInput = document.getElementById('pix-receipt');
         const uploadText = document.getElementById('upload-text');
         const uploadLabel = document.getElementById('upload-label');
@@ -986,66 +803,33 @@
         const inputCvv = document.getElementById('card-cvv');
         const globalError = document.getElementById('global-error');
 
-        pixReceiptInput.addEventListener('change', function(e) {
-            if(this.files && this.files.length > 0) {
-                uploadText.textContent = "COMPROVANTE: " + this.files[0].name;
-                uploadLabel.classList.add('file-selected');
-                clearErrors();
-            } else {
-                uploadText.textContent = "ANEXAR COMPROVANTE (IMG/PDF)";
-                uploadLabel.classList.remove('file-selected');
-            }
-        });
-
-        inputCard.addEventListener('input', (e) => {
-            let val = e.target.value.replace(/\D/g, '');
-            val = val.replace(/(.{4})/g, '$1 ').trim();
-            e.target.value = val;
-        });
-
-        inputExpiry.addEventListener('input', (e) => {
-            let val = e.target.value.replace(/\D/g, '');
-            if(val.length > 2) val = val.replace(/^(\d{2})(\d)/, '$1/$2');
-            e.target.value = val;
-        });
-
-        inputCvv.addEventListener('input', (e) => { e.target.value = e.target.value.replace(/\D/g, ''); });
-
-        function isValidCardNumber(number) {
-            let digits = number.replace(/\D/g, '');
-            if (digits.length < 13 || digits.length > 19) return false;
-            let sum = 0, shouldDouble = false;
-            for (let i = digits.length - 1; i >= 0; i--) {
-                let digit = parseInt(digits.charAt(i));
-                if (shouldDouble) { if ((digit *= 2) > 9) digit -= 9; }
-                sum += digit; shouldDouble = !shouldDouble;
-            }
-            return (sum % 10) == 0;
+        if(pixReceiptInput) {
+            pixReceiptInput.addEventListener('change', function() {
+                if(this.files && this.files.length > 0) {
+                    uploadText.textContent = "COMPROVANTE: " + this.files[0].name;
+                    uploadLabel.classList.add('file-selected');
+                    clearErrors();
+                } else {
+                    uploadText.textContent = "ANEXAR COMPROVANTE (IMG/PDF)";
+                    uploadLabel.classList.remove('file-selected');
+                }
+            });
         }
 
-        function isValidExpiryDate(expiry) {
-            const match = expiry.match(/^(0[1-9]|1[0-2])\/(\d{2})$/);
-            if (!match) return false;
-            const month = parseInt(match[1]), year = parseInt("20" + match[2]);
-            const now = new Date(), currentYear = now.getFullYear(), currentMonth = now.getMonth() + 1;
-            if (year < currentYear) return false;
-            if (year === currentYear && month < currentMonth) return false;
-            return true;
-        }
+        if(inputCard) inputCard.addEventListener('input', (e) => { e.target.value = e.target.value.replace(/\D/g, '').replace(/(.{4})/g, '$1 ').trim(); });
+        if(inputExpiry) inputExpiry.addEventListener('input', (e) => { let val = e.target.value.replace(/\D/g, ''); if(val.length > 2) val = val.replace(/^(\d{2})(\d)/, '$1/$2'); e.target.value = val; });
+        if(inputCvv) inputCvv.addEventListener('input', (e) => { e.target.value = e.target.value.replace(/\D/g, ''); });
+
+        function isValidCardNumber(n) { let d = n.replace(/\D/g, ''); if(d.length<13||d.length>19) return false; let s=0, double=false; for(let i=d.length-1; i>=0; i--){ let v = parseInt(d.charAt(i)); if(double) { if((v*=2)>9) v-=9; } s+=v; double=!double; } return (s%10)==0; }
+        function isValidExpiryDate(e) { const m = e.match(/^(0[1-9]|1[0-2])\/(\d{2})$/); if(!m) return false; const mo=parseInt(m[1]), yr=parseInt("20"+m[2]), now=new Date(); return yr > now.getFullYear() || (yr === now.getFullYear() && mo >= now.getMonth() + 1); }
 
         function clearErrors() {
-            globalError.textContent = "";
-            document.querySelectorAll('input').forEach(input => input.classList.remove('error-border'));
-            
-            if(!uploadLabel.classList.contains('file-selected')) {
-                uploadLabel.style.borderColor = 'var(--border-glass)';
-                uploadLabel.style.color = 'var(--text-light)';
-            }
+            if(globalError) globalError.textContent = "";
+            document.querySelectorAll('input').forEach(input => input.style.borderColor = '');
+            if(uploadLabel && !uploadLabel.classList.contains('file-selected')) { uploadLabel.style.borderColor = 'var(--border-glass)'; uploadLabel.style.color = 'var(--text-light)'; }
         }
 
-        // ==========================
-        // LÓGICA DO MODAL DE PAGAMENTO
-        // ==========================
+        // ================= MODAL DE CHECKOUT & SALVAR PEDIDO NO FIREBASE =================
         const paymentModal = document.getElementById('payment-modal');
         const btnOpenPayment = document.getElementById('btn-open-payment');
         const btnClosePayment = document.getElementById('close-payment');
@@ -1053,260 +837,154 @@
         const formAreas = document.querySelectorAll('.form-area');
         const btnProcessPayment = document.getElementById('btn-process-payment');
 
-        btnOpenPayment.addEventListener('click', () => {
-            // TRAVA DE SEGURANÇA: EXIGE LOGIN
-            if(!currentUser) {
-                sidebar.classList.remove('open');
-                loginModal.classList.add('active');
-                return;
-            }
+        if(btnOpenPayment) {
+            btnOpenPayment.addEventListener('click', () => {
+                if(!currentUser) { sidebar.classList.remove('open'); loginModal.classList.add('active'); return; }
+                if(cart.length === 0) { btnOpenPayment.textContent = "SACOLA VAZIA"; btnOpenPayment.style.background = "#ff4444"; setTimeout(() => { btnOpenPayment.textContent = "FINALIZAR COMPRA"; btnOpenPayment.style.background = "var(--acid-green)"; }, 1500); return; }
+                if(!lastCepData) { btnOpenPayment.textContent = "CALCULE O FRETE 1º"; btnOpenPayment.style.background = "#ff4444"; btnOpenPayment.style.color = "#000"; setTimeout(() => { btnOpenPayment.textContent = "FINALIZAR COMPRA"; btnOpenPayment.style.background = "var(--acid-green)"; btnOpenPayment.style.color = "#000"; }, 2000); return; }
 
-            if(cart.length === 0) {
-                btnOpenPayment.textContent = "SACOLA VAZIA";
-                btnOpenPayment.style.background = "#ff4444";
-                setTimeout(() => { btnOpenPayment.textContent = "FINALIZAR COMPRA"; btnOpenPayment.style.background = "var(--acid-green)"; }, 1500);
-                return;
-            }
+                document.getElementById('address-street').value = lastCepData.logradouro || '';
+                document.getElementById('address-neighborhood').value = lastCepData.bairro || '';
+                document.getElementById('address-city').value = lastCepData.localidade || '';
+                document.getElementById('address-uf').value = lastCepData.uf || '';
+                
+                sidebar.classList.remove('open'); paymentModal.classList.add('active'); clearErrors();
+            });
+        }
 
-            if(!lastCepData) {
-                btnOpenPayment.textContent = "CALCULE O FRETE 1º";
-                btnOpenPayment.style.background = "#ff4444";
-                btnOpenPayment.style.color = "#fff";
-                setTimeout(() => { btnOpenPayment.textContent = "FINALIZAR COMPRA"; btnOpenPayment.style.background = "var(--acid-green)"; btnOpenPayment.style.color = "#000"; }, 2000);
-                return;
-            }
-
-            document.getElementById('address-street').value = lastCepData.logradouro || '';
-            document.getElementById('address-neighborhood').value = lastCepData.bairro || '';
-            document.getElementById('address-city').value = lastCepData.localidade || '';
-            document.getElementById('address-uf').value = lastCepData.uf || '';
-            
-            sidebar.classList.remove('open');
-            paymentModal.classList.add('active');
-            clearErrors();
-        });
-
-        btnClosePayment.addEventListener('click', () => {
-            paymentModal.classList.remove('active');
-            overlay.classList.remove('active');
-        });
+        if(btnClosePayment) btnClosePayment.addEventListener('click', () => { paymentModal.classList.remove('active'); overlay.classList.remove('active'); });
 
         methodBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                methodBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                
-                const target = btn.getAttribute('data-target');
+                methodBtns.forEach(b => b.classList.remove('active')); btn.classList.add('active');
                 formAreas.forEach(form => form.style.display = 'none');
-                document.getElementById(target).style.display = 'block';
-                clearErrors();
+                document.getElementById(btn.getAttribute('data-target')).style.display = 'block'; clearErrors();
             });
         });
 
-        // ======= PROCESSAMENTO E ENVIO PARA O FIREBASE ======= //
-        btnProcessPayment.addEventListener('click', async () => {
-            clearErrors();
-            let hasError = false;
+        if(btnProcessPayment) {
+            btnProcessPayment.addEventListener('click', () => {
+                clearErrors(); let hasError = false;
+                const inputStreet = document.getElementById('address-street'), inputNumber = document.getElementById('address-number'), inputComplement = document.getElementById('address-complement');
 
-            const inputStreet = document.getElementById('address-street');
-            const inputNumber = document.getElementById('address-number');
-            const inputComplement = document.getElementById('address-complement');
+                if (!inputStreet.value.trim() || !inputNumber.value.trim()) { globalError.textContent = "PREENCHA A RUA E O NÚMERO DA ENTREGA"; if (!inputStreet.value.trim()) inputStreet.style.borderColor = '#ff4444'; if (!inputNumber.value.trim()) inputNumber.style.borderColor = '#ff4444'; hasError = true; }
 
-            if (!inputStreet.value.trim() || !inputNumber.value.trim()) {
-                globalError.textContent = "PREENCHA A RUA E O NÚMERO DA ENTREGA";
-                if (!inputStreet.value.trim()) inputStreet.classList.add('error-border');
-                if (!inputNumber.value.trim()) inputNumber.classList.add('error-border');
-                hasError = true;
-            }
+                const activeMethodBtn = document.querySelector('.method-btn.active');
+                const activeMethodTarget = activeMethodBtn ? activeMethodBtn.getAttribute('data-target') : null;
+                const methodType = activeMethodBtn ? activeMethodBtn.textContent : '';
 
-            const activeMethodBtn = document.querySelector('.method-btn.active');
-            const activeMethodTarget = activeMethodBtn.getAttribute('data-target');
-            const methodType = activeMethodBtn.textContent;
-
-            if (!hasError) {
-                if (activeMethodTarget === 'card-form') {
-                    if (!isValidCardNumber(inputCard.value)) {
-                        inputCard.classList.add('error-border');
-                        globalError.textContent = "NÚMERO DE CARTÃO INVÁLIDO";
-                        hasError = true;
-                    }
-                    else if (inputName.value.trim().length < 3) {
-                        inputName.classList.add('error-border');
-                        globalError.textContent = "NOME DO TITULAR INVÁLIDO";
-                        hasError = true;
-                    }
-                    else if (!isValidExpiryDate(inputExpiry.value)) {
-                        inputExpiry.classList.add('error-border');
-                        globalError.textContent = "DATA DE VALIDADE INCORRETA OU VENCIDA";
-                        hasError = true;
-                    }
-                    else if (inputCvv.value.length < 3) {
-                        inputCvv.classList.add('error-border');
-                        globalError.textContent = "CVV INVÁLIDO";
-                        hasError = true;
-                    }
-                } 
-                else if (activeMethodTarget === 'pix-form') {
-                    if (!pixReceiptInput.files || pixReceiptInput.files.length === 0) {
-                        uploadLabel.style.borderColor = '#ff4444';
-                        uploadLabel.style.color = '#ff4444';
-                        globalError.textContent = "ENVIE O COMPROVANTE DO PIX PARA CONTINUAR";
-                        hasError = true;
+                if (!hasError && activeMethodTarget) {
+                    if (activeMethodTarget === 'card-form') {
+                        if (!isValidCardNumber(inputCard.value)) { inputCard.style.borderColor = '#ff4444'; globalError.textContent = "NÚMERO DE CARTÃO INVÁLIDO"; hasError = true; }
+                        else if (inputName.value.trim().length < 3) { inputName.style.borderColor = '#ff4444'; globalError.textContent = "NOME DO TITULAR INVÁLIDO"; hasError = true; }
+                        else if (!isValidExpiryDate(inputExpiry.value)) { inputExpiry.style.borderColor = '#ff4444'; globalError.textContent = "DATA DE VALIDADE INCORRETA OU VENCIDA"; hasError = true; }
+                        else if (inputCvv.value.length < 3) { inputCvv.style.borderColor = '#ff4444'; globalError.textContent = "CVV INVÁLIDO"; hasError = true; }
+                    } else if (activeMethodTarget === 'pix-form') {
+                        if (!pixReceiptInput.files || pixReceiptInput.files.length === 0) { uploadLabel.style.borderColor = '#ff4444'; uploadLabel.style.color = '#ff4444'; globalError.textContent = "ENVIE O COMPROVANTE DO PIX"; hasError = true; }
                     }
                 }
-            }
 
-            if (hasError) return;
+                if (hasError) return;
 
-            const ogText = btnProcessPayment.innerHTML;
-            btnProcessPayment.innerHTML = "PROCESSANDO...";
-            btnProcessPayment.style.opacity = "0.5";
-            btnProcessPayment.style.pointerEvents = "none";
+                const ogText = btnProcessPayment.innerHTML;
+                btnProcessPayment.innerHTML = "PROCESSANDO..."; btnProcessPayment.style.opacity = "0.5"; btnProcessPayment.style.pointerEvents = "none";
 
-            try {
                 const subtotal = cart.reduce((acc, item) => acc + item.price, 0);
                 const orderData = {
-                    createdAt: serverTimestamp(),
-                    status: 'pendente',
-                    cliente: currentUser, // INSERINDO DADOS DO CLIENTE NO PEDIDO
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp(), 
+                    status: 'pendente', 
+                    cliente: currentUser, 
                     items: cart,
-                    shipping: {
-                        street: inputStreet.value,
-                        number: inputNumber.value,
-                        complement: inputComplement.value,
-                        neighborhood: document.getElementById('address-neighborhood').value,
-                        city: lastCepData.localidade,
-                        uf: lastCepData.uf,
-                        cep: document.getElementById('cep-input').value,
-                        cost: shippingCost
-                    },
-                    payment: {
-                        method: methodType,
-                        cardLast4: activeMethodTarget === 'card-form' ? inputCard.value.slice(-4) : null,
-                    },
-                    totals: {
-                        subtotal: subtotal,
-                        shipping: shippingCost,
-                        finalTotal: subtotal + shippingCost
-                    }
+                    shipping: { street: inputStreet.value, number: inputNumber.value, complement: inputComplement.value, neighborhood: document.getElementById('address-neighborhood').value, city: lastCepData.localidade, uf: lastCepData.uf, cep: document.getElementById('cep-input').value, cost: shippingCost },
+                    payment: { method: methodType, cardLast4: activeMethodTarget === 'card-form' ? inputCard.value.slice(-4) : null },
+                    totals: { subtotal: subtotal, shipping: shippingCost, finalTotal: subtotal + shippingCost }
                 };
 
-                // ADICIONA O DOCUMENTO NO FIRESTORE NA COLEÇÃO "pedidos"
-                const docRef = await addDoc(collection(dbFirestore, "pedidos"), orderData);
-                console.log("Pedido salvo com sucesso! ID:", docRef.id);
+                // Salva o Pedido no Firestore (v8)
+                db.collection("pedidos").add(orderData).then(() => {
+                    btnProcessPayment.innerHTML = "PEDIDO CONFIRMADO!"; btnProcessPayment.style.background = "var(--acid-green)"; btnProcessPayment.style.color = "#000"; btnProcessPayment.style.opacity = "1";
 
-                btnProcessPayment.innerHTML = "PEDIDO CONFIRMADO!";
-                btnProcessPayment.style.background = "var(--acid-green)";
-                btnProcessPayment.style.color = "#000";
-                btnProcessPayment.style.opacity = "1";
+                    cart = []; shippingCost = 0; lastCepData = null;
+                    document.getElementById('cep-result').innerHTML = ''; document.getElementById('cep-input').value = '';
+                    if(pixReceiptInput) pixReceiptInput.value = ''; if(uploadText) uploadText.textContent = "ANEXAR COMPROVANTE (IMG/PDF)"; if(uploadLabel) uploadLabel.classList.remove('file-selected');
 
-                cart = [];
-                shippingCost = 0; 
-                lastCepData = null;
-                document.getElementById('cep-result').innerHTML = ''; 
-                document.getElementById('cep-input').value = '';
-                pixReceiptInput.value = '';
-                uploadText.textContent = "ANEXAR COMPROVANTE (IMG/PDF)";
-                uploadLabel.classList.remove('file-selected');
+                    updateCart();
 
-                updateCart();
+                    setTimeout(() => {
+                        paymentModal.classList.remove('active'); overlay.classList.remove('active');
+                        btnProcessPayment.innerHTML = ogText; btnProcessPayment.style.background = ""; btnProcessPayment.style.pointerEvents = "auto";
+                        document.querySelectorAll('input[type="text"]').forEach(input => input.value = ''); clearErrors();
+                    }, 2500);
 
-                setTimeout(() => {
-                    paymentModal.classList.remove('active');
-                    overlay.classList.remove('active');
-                    
-                    btnProcessPayment.innerHTML = ogText;
-                    btnProcessPayment.style.background = "var(--text-light)";
-                    btnProcessPayment.style.pointerEvents = "auto";
-                    
-                    document.querySelectorAll('input[type="text"]').forEach(input => input.value = '');
-                    clearErrors();
-                }, 2500);
+                }).catch((error) => {
+                    console.error("Erro ao salvar pedido: ", error);
+                    globalError.textContent = "ERRO AO CONECTAR COM O SERVIDOR.";
+                    btnProcessPayment.innerHTML = ogText; btnProcessPayment.style.opacity = "1"; btnProcessPayment.style.pointerEvents = "auto";
+                });
+            });
+        }
 
-            } catch (error) {
-                console.error("Erro ao salvar pedido no Firebase: ", error);
-                globalError.textContent = "ERRO AO CONECTAR COM O SERVIDOR. TENTE NOVAMENTE.";
-                btnProcessPayment.innerHTML = ogText;
-                btnProcessPayment.style.opacity = "1";
-                btnProcessPayment.style.pointerEvents = "auto";
-            }
-        });
-
-        // Inicializa a interface da sacola
         updateCart();
 
-        // ==========================
-        // LISTAGEM DINÂMICA DE PRODUTOS (REALTIME DATABASE)
-        // ==========================
-        const produtosRef = ref(dbRealtime, 'produtos');
+        // ================= PUXAR PRODUTOS DO BANCO DE DADOS (FIRESTORE V8) =================
+        function carregarVitrine() {
+            // Limpa as grids antes de carregar
+            const categoriasValidas = ['camisas', 'moletons', 'calcas', 'perfumes', 'promocoes'];
+            categoriasValidas.forEach(cat => { 
+                const grid = document.querySelector(`#${cat} .grid`); 
+                if (grid) grid.innerHTML = ""; 
+            });
 
-        onValue(produtosRef, (snapshot) => {
-            const data = snapshot.val();
-            const gridCamisas = document.querySelector('#camisas .grid');
-            
-            if(gridCamisas && data) {
-                gridCamisas.innerHTML = "";
-
-                for (let id in data) {
-                    const produto = data[id];
-                    
-                    const cardHTML = `
-                        <div class="card">
-                            <div class="card-img">
-                                <span class="price-tag">R$ ${produto.preco.toFixed(2)}</span>
-                                <img src="${produto.img}" alt="${produto.nome}">
-                            </div>
-                            <div class="card-info">
-                                <h3>${produto.nome}</h3>
-                                <div class="sizes">
-                                    <button class="size-btn">P</button>
-                                    <button class="size-btn">M</button>
-                                    <button class="size-btn">G</button>
-                                </div>
-                                <button class="add-btn" 
-                                    data-name="${produto.nome}" 
-                                    data-price="${produto.preco}" 
-                                    data-img="${produto.img}">
-                                    Adicionar
-                                </button>
-                            </div>
-                        </div>
-                    `;
-                    
-                    if(produto.categoria === 'camisas') {
-                        gridCamisas.innerHTML += cardHTML;
-                    }
+            // Puxa do Firestore
+            db.collection("produtos").get().then((querySnapshot) => {
+                if (querySnapshot.empty) {
+                    console.log("Nenhum produto cadastrado ainda.");
+                    return;
                 }
-                
-                // Re-atribui os eventos de clique para os novos botões dinâmicos
-                document.querySelectorAll('#camisas .add-btn').forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        const card = btn.closest('.card');
-                        const selectedSize = card.querySelector('.size-btn.selected');
+
+                querySnapshot.forEach((doc) => {
+                    const produto = doc.data();
+                    
+                    if (produto.categoria) {
+                        const isPromo = produto.categoria === 'promocoes';
+                        const specialClass = isPromo ? 'card-special' : '';
+                        const badgeHtml = isPromo ? '<span class="badge-vip">SALE</span>' : '';
+
+                        // Html da Cartinha de Produto (Igual ao seu design)
+                        const cardHTML = `
+                            <div class="card ${specialClass}">
+                                ${badgeHtml}
+                                <div class="card-img">
+                                    <span class="price-tag">${formatCurrency(produto.preco)}</span>
+                                    <img src="${produto.img}" alt="${produto.nome}" style="width: 100%; object-fit: cover;">
+                                </div>
+                                <div class="card-info">
+                                    <h3>${produto.nome}</h3>
+                                    <div class="sizes">
+                                        <button class="size-btn">P</button>
+                                        <button class="size-btn">M</button>
+                                        <button class="size-btn">G</button>
+                                        <button class="size-btn">GG</button>
+                                    </div>
+                                    <button class="add-btn" data-name="${produto.nome}" data-price="${produto.preco}" data-img="${produto.img}">ADICIONAR</button>
+                                </div>
+                            </div>`;
                         
-                        if(!selectedSize) {
-                            const ogText = btn.textContent; 
-                            btn.textContent = "SELECIONE O TAMANHO"; 
-                            btn.style.color = "#ff4444"; 
-                            btn.style.background = "transparent";
-                            setTimeout(() => { btn.textContent = ogText; btn.style.color = ""; btn.style.background = ""; }, 1500);
-                            return;
+                        const targetGrid = document.querySelector(`#${produto.categoria} .grid`);
+                        if(targetGrid) {
+                            targetGrid.innerHTML += cardHTML;
                         }
-                        
-                        cart.push({
-                            name: btn.getAttribute('data-name'),
-                            price: parseFloat(btn.getAttribute('data-price')),
-                            img: btn.getAttribute('data-img'),
-                            size: selectedSize.textContent
-                        });
-                        
-                        updateCart(); 
-                        toggleCart(); 
-                        selectedSize.classList.remove('selected');
-                    });
+                    }
                 });
-            }
-        });
+            }).catch((error) => {
+                console.error("Erro ao puxar produtos:", error);
+            });
+        }
+
+        // Chama a função ao abrir o site
+        carregarVitrine();
+
     </script>
 </body>
+</html>
 </html>
