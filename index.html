@@ -317,6 +317,18 @@
         }
     </style>
 </head>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HYPE STORE</title>
+    <style>
+        /* ========================================= */
+        /* COLE AQUI TODO O SEU CÓDIGO CSS EXISTENTE */
+        /* ========================================= */
+    </style>
+</head>
 <body>
 
     <div class="marquee-container">
@@ -334,6 +346,7 @@
                 <li><a href="#camisas">Camisas</a></li>
                 <li><a href="#moletons">Moletons</a></li>
                 <li><a href="#calcas">Calças</a></li>
+                <li><a href="#bones">Bonés</a></li>
                 <li><a href="#promocoes" class="nav-promo">Promoções</a></li>
             </ul>
         </nav>
@@ -370,9 +383,14 @@
             <h2 class="category-title">03 <span>Calças</span></h2>
             <div class="grid"></div>
         </section>
+
+        <section id="bones" class="category-section">
+            <h2 class="category-title">04 <span>Bonés</span></h2>
+            <div class="grid"></div>
+        </section>
         
         <section id="perfumes" class="category-section">
-            <h2 class="category-title">04 <span>Perfumes</span></h2>
+            <h2 class="category-title">05 <span>Perfumes</span></h2>
             <div class="grid"></div>
         </section>
 
@@ -387,6 +405,7 @@
         <a href="#camisas" class="quick-select-btn">Camisas</a>
         <a href="#moletons" class="quick-select-btn">Moletons</a>
         <a href="#calcas" class="quick-select-btn">Calças</a>
+        <a href="#bones" class="quick-select-btn">Bonés</a>
         <a href="#perfumes" class="quick-select-btn">Perfumes</a>
         <a href="#promocoes" class="quick-select-btn" style="color: var(--acid-green);">Sale</a>
     </div>
@@ -887,7 +906,6 @@
                     totals: { subtotal: subtotal, shipping: shippingCost, finalTotal: finalTotal }
                 };
 
-                // Salva o Pedido no Firestore
                 db.collection("pedidos").add(orderData).then((docRef) => {
                     if (activeMethodTarget === 'card-form') {
                         btnProcessPayment.innerHTML = "GERANDO LINK SEGURO..."; 
@@ -895,8 +913,6 @@
                         btnProcessPayment.style.color = "#000"; 
                         btnProcessPayment.style.opacity = "1";
 
-                        // ================= AQUI A MÁGICA ACONTECE =================
-                        // Enviamos o valor e o docRef.id para o servidor
                         fetch('https://api-hype-store.onrender.com/gerar-pagamento', {
                             method: 'POST',
                             headers: {
@@ -906,7 +922,7 @@
                                 titulo: "Pedido Hype Store - #" + docRef.id,
                                 valor: finalTotal,
                                 email: currentUser.email,
-                                idPedido: docRef.id // ENVIA O ID DO PEDIDO PRO BACKEND
+                                idPedido: docRef.id
                             })
                         })
                         .then(response => response.json())
@@ -929,7 +945,6 @@
                         });
                         
                     } else {
-                        // LÓGICA DO PIX (MANTIDA IGUAL)
                         btnProcessPayment.innerHTML = "PEDIDO CONFIRMADO!"; 
                         btnProcessPayment.style.background = "var(--acid-green)"; 
                         btnProcessPayment.style.color = "#000"; 
@@ -959,7 +974,8 @@
 
         // ================= PUXAR PRODUTOS DO BANCO DE DADOS (FIRESTORE) =================
         function carregarVitrine() {
-            const categoriasValidas = ['camisas', 'moletons', 'calcas', 'perfumes', 'promocoes'];
+            // AQUI ADICIONAMOS A CATEGORIA BONES
+            const categoriasValidas = ['camisas', 'moletons', 'calcas', 'bones', 'perfumes', 'promocoes'];
             categoriasValidas.forEach(cat => { 
                 const grid = document.querySelector(`#${cat} .grid`); 
                 if (grid) grid.innerHTML = ""; 
@@ -1009,7 +1025,6 @@
             });
         }
 
-        // Chama a função ao abrir o site
         carregarVitrine();
 
     </script>
