@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HYPE STORE</title>
-<style>
-     /* ========================
+    <style>
+      /* ========================
            VARIÁVEIS ULTRA-MODERNAS
            ======================== */
         :root {
@@ -316,7 +316,7 @@
             .quick-select-btn { padding: 10px 15px; font-size: 0.6rem; }
         }
     </style>
-    </head>
+</head>
 <body>
 
     <div class="marquee-container">
@@ -468,28 +468,14 @@
 
         <h3 class="section-title">Forma de Pagamento</h3>
         <div class="payment-methods">
-            <button class="method-btn active" data-target="card-form">CARTÃO</button>
+            <button class="method-btn active" data-target="card-form">CARTÃO/MP</button>
             <button class="method-btn" data-target="pix-form">PIX</button>
         </div>
 
         <div id="card-form" class="form-area">
-            <div class="input-group">
-                <label>NÚMERO DO CARTÃO</label>
-                <input type="text" id="card-number" placeholder="0000 0000 0000 0000" maxlength="19">
-            </div>
-            <div class="input-group">
-                <label>NOME IMPRESSO NO CARTÃO</label>
-                <input type="text" id="card-name" placeholder="NOME DO TITULAR">
-            </div>
-            <div class="row">
-                <div class="input-group">
-                    <label>VALIDADE</label>
-                    <input type="text" id="card-expiry" placeholder="MM/AA" maxlength="5">
-                </div>
-                <div class="input-group">
-                    <label>CVV</label>
-                    <input type="text" id="card-cvv" placeholder="123" maxlength="4">
-                </div>
+            <div style="text-align: center; padding: 20px; border: 1px dashed var(--border-glass); border-radius: 5px;">
+                <p style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 10px;">🛡️ PAGAMENTO SEGURO</p>
+                <p style="font-size: 0.8rem; color: var(--text-dim);">Você será redirecionado para o ambiente seguro do <strong>Mercado Pago</strong> para finalizar sua compra via Cartão de Crédito ou Débito.</p>
             </div>
         </div>
 
@@ -607,7 +593,6 @@
                 btnSubmitLogin.style.opacity = "0.5";
                 btnSubmitLogin.style.pointerEvents = "none";
 
-                // Salva no Firestore (v8)
                 db.collection("clientes").add({ 
                     email: email, 
                     whatsapp: wa, 
@@ -793,14 +778,10 @@
             });
         }
 
-        // ================= VALIDAÇÕES DE FORMULÁRIO (CARTÃO/PIX) =================
+        // ================= VALIDAÇÕES DE FORMULÁRIO =================
         const pixReceiptInput = document.getElementById('pix-receipt');
         const uploadText = document.getElementById('upload-text');
         const uploadLabel = document.getElementById('upload-label');
-        const inputCard = document.getElementById('card-number');
-        const inputName = document.getElementById('card-name');
-        const inputExpiry = document.getElementById('card-expiry');
-        const inputCvv = document.getElementById('card-cvv');
         const globalError = document.getElementById('global-error');
 
         if(pixReceiptInput) {
@@ -816,20 +797,13 @@
             });
         }
 
-        if(inputCard) inputCard.addEventListener('input', (e) => { e.target.value = e.target.value.replace(/\D/g, '').replace(/(.{4})/g, '$1 ').trim(); });
-        if(inputExpiry) inputExpiry.addEventListener('input', (e) => { let val = e.target.value.replace(/\D/g, ''); if(val.length > 2) val = val.replace(/^(\d{2})(\d)/, '$1/$2'); e.target.value = val; });
-        if(inputCvv) inputCvv.addEventListener('input', (e) => { e.target.value = e.target.value.replace(/\D/g, ''); });
-
-        function isValidCardNumber(n) { let d = n.replace(/\D/g, ''); if(d.length<13||d.length>19) return false; let s=0, double=false; for(let i=d.length-1; i>=0; i--){ let v = parseInt(d.charAt(i)); if(double) { if((v*=2)>9) v-=9; } s+=v; double=!double; } return (s%10)==0; }
-        function isValidExpiryDate(e) { const m = e.match(/^(0[1-9]|1[0-2])\/(\d{2})$/); if(!m) return false; const mo=parseInt(m[1]), yr=parseInt("20"+m[2]), now=new Date(); return yr > now.getFullYear() || (yr === now.getFullYear() && mo >= now.getMonth() + 1); }
-
         function clearErrors() {
             if(globalError) globalError.textContent = "";
             document.querySelectorAll('input').forEach(input => input.style.borderColor = '');
             if(uploadLabel && !uploadLabel.classList.contains('file-selected')) { uploadLabel.style.borderColor = 'var(--border-glass)'; uploadLabel.style.color = 'var(--text-light)'; }
         }
 
-        // ================= MODAL DE CHECKOUT & SALVAR PEDIDO NO FIREBASE =================
+        // ================= MODAL DE CHECKOUT & SALVAR PEDIDO =================
         const paymentModal = document.getElementById('payment-modal');
         const btnOpenPayment = document.getElementById('btn-open-payment');
         const btnClosePayment = document.getElementById('close-payment');
@@ -873,15 +847,8 @@
                 const activeMethodTarget = activeMethodBtn ? activeMethodBtn.getAttribute('data-target') : null;
                 const methodType = activeMethodBtn ? activeMethodBtn.textContent : '';
 
-                if (!hasError && activeMethodTarget) {
-                    if (activeMethodTarget === 'card-form') {
-                        if (!isValidCardNumber(inputCard.value)) { inputCard.style.borderColor = '#ff4444'; globalError.textContent = "NÚMERO DE CARTÃO INVÁLIDO"; hasError = true; }
-                        else if (inputName.value.trim().length < 3) { inputName.style.borderColor = '#ff4444'; globalError.textContent = "NOME DO TITULAR INVÁLIDO"; hasError = true; }
-                        else if (!isValidExpiryDate(inputExpiry.value)) { inputExpiry.style.borderColor = '#ff4444'; globalError.textContent = "DATA DE VALIDADE INCORRETA OU VENCIDA"; hasError = true; }
-                        else if (inputCvv.value.length < 3) { inputCvv.style.borderColor = '#ff4444'; globalError.textContent = "CVV INVÁLIDO"; hasError = true; }
-                    } else if (activeMethodTarget === 'pix-form') {
-                        if (!pixReceiptInput.files || pixReceiptInput.files.length === 0) { uploadLabel.style.borderColor = '#ff4444'; uploadLabel.style.color = '#ff4444'; globalError.textContent = "ENVIE O COMPROVANTE DO PIX"; hasError = true; }
-                    }
+                if (!hasError && activeMethodTarget === 'pix-form') {
+                    if (!pixReceiptInput.files || pixReceiptInput.files.length === 0) { uploadLabel.style.borderColor = '#ff4444'; uploadLabel.style.color = '#ff4444'; globalError.textContent = "ENVIE O COMPROVANTE DO PIX"; hasError = true; }
                 }
 
                 if (hasError) return;
@@ -890,32 +857,79 @@
                 btnProcessPayment.innerHTML = "PROCESSANDO..."; btnProcessPayment.style.opacity = "0.5"; btnProcessPayment.style.pointerEvents = "none";
 
                 const subtotal = cart.reduce((acc, item) => acc + item.price, 0);
+                const finalTotal = subtotal + shippingCost;
+                
                 const orderData = {
                     createdAt: firebase.firestore.FieldValue.serverTimestamp(), 
                     status: 'pendente', 
                     cliente: currentUser, 
                     items: cart,
                     shipping: { street: inputStreet.value, number: inputNumber.value, complement: inputComplement.value, neighborhood: document.getElementById('address-neighborhood').value, city: lastCepData.localidade, uf: lastCepData.uf, cep: document.getElementById('cep-input').value, cost: shippingCost },
-                    payment: { method: methodType, cardLast4: activeMethodTarget === 'card-form' ? inputCard.value.slice(-4) : null },
-                    totals: { subtotal: subtotal, shipping: shippingCost, finalTotal: subtotal + shippingCost }
+                    payment: { method: methodType },
+                    totals: { subtotal: subtotal, shipping: shippingCost, finalTotal: finalTotal }
                 };
 
-                // Salva o Pedido no Firestore (v8)
-                db.collection("pedidos").add(orderData).then(() => {
-                    btnProcessPayment.innerHTML = "PEDIDO CONFIRMADO!"; btnProcessPayment.style.background = "var(--acid-green)"; btnProcessPayment.style.color = "#000"; btnProcessPayment.style.opacity = "1";
+                // Salva o Pedido no Firestore
+                db.collection("pedidos").add(orderData).then((docRef) => {
+                    if (activeMethodTarget === 'card-form') {
+                        // LOGICA NOVA DO MERCADO PAGO VIA API (RENDER)
+                        btnProcessPayment.innerHTML = "GERANDO LINK SEGURO..."; 
+                        btnProcessPayment.style.background = "var(--acid-green)"; 
+                        btnProcessPayment.style.color = "#000"; 
+                        btnProcessPayment.style.opacity = "1";
 
-                    cart = []; shippingCost = 0; lastCepData = null;
-                    document.getElementById('cep-result').innerHTML = ''; document.getElementById('cep-input').value = '';
-                    if(pixReceiptInput) pixReceiptInput.value = ''; if(uploadText) uploadText.textContent = "ANEXAR COMPROVANTE (IMG/PDF)"; if(uploadLabel) uploadLabel.classList.remove('file-selected');
+                        fetch('https://api-hype-store.onrender.com/gerar-pagamento', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                titulo: "Pedido Hype Store - #" + docRef.id,
+                                valor: finalTotal,
+                                email: currentUser.email
+                            })
+                        })
+                        .then(response => response.json())
+                        .then(dadosDoMercadoPago => {
+                            if(dadosDoMercadoPago.init_point) {
+                                // Limpa o carrinho local
+                                cart = []; shippingCost = 0; lastCepData = null;
+                                updateCart();
+                                
+                                // Redireciona o cliente para pagar no MP
+                                window.location.href = dadosDoMercadoPago.init_point;
+                            } else {
+                                throw new Error("Link não gerado pelo Mercado Pago");
+                            }
+                        })
+                        .catch(erro => {
+                            console.error("Erro ao gerar link:", erro);
+                            globalError.textContent = "ERRO AO GERAR PAGAMENTO. TENTE NOVAMENTE.";
+                            btnProcessPayment.innerHTML = "TENTAR NOVAMENTE";
+                            btnProcessPayment.style.opacity = "1";
+                            btnProcessPayment.style.pointerEvents = "auto";
+                            btnProcessPayment.style.background = "";
+                        });
+                        
+                    } else {
+                        // LÓGICA DO PIX (MANTIDA IGUAL)
+                        btnProcessPayment.innerHTML = "PEDIDO CONFIRMADO!"; 
+                        btnProcessPayment.style.background = "var(--acid-green)"; 
+                        btnProcessPayment.style.color = "#000"; 
+                        btnProcessPayment.style.opacity = "1";
 
-                    updateCart();
+                        cart = []; shippingCost = 0; lastCepData = null;
+                        document.getElementById('cep-result').innerHTML = ''; document.getElementById('cep-input').value = '';
+                        if(pixReceiptInput) pixReceiptInput.value = ''; if(uploadText) uploadText.textContent = "ANEXAR COMPROVANTE (IMG/PDF)"; if(uploadLabel) uploadLabel.classList.remove('file-selected');
 
-                    setTimeout(() => {
-                        paymentModal.classList.remove('active'); overlay.classList.remove('active');
-                        btnProcessPayment.innerHTML = ogText; btnProcessPayment.style.background = ""; btnProcessPayment.style.pointerEvents = "auto";
-                        document.querySelectorAll('input[type="text"]').forEach(input => input.value = ''); clearErrors();
-                    }, 2500);
+                        updateCart();
 
+                        setTimeout(() => {
+                            paymentModal.classList.remove('active'); overlay.classList.remove('active');
+                            btnProcessPayment.innerHTML = ogText; btnProcessPayment.style.background = ""; btnProcessPayment.style.pointerEvents = "auto";
+                            document.querySelectorAll('input[type="text"]').forEach(input => input.value = ''); clearErrors();
+                        }, 2500);
+                    }
                 }).catch((error) => {
                     console.error("Erro ao salvar pedido: ", error);
                     globalError.textContent = "ERRO AO CONECTAR COM O SERVIDOR.";
@@ -926,16 +940,14 @@
 
         updateCart();
 
-        // ================= PUXAR PRODUTOS DO BANCO DE DADOS (FIRESTORE V8) =================
+        // ================= PUXAR PRODUTOS DO BANCO DE DADOS (FIRESTORE) =================
         function carregarVitrine() {
-            // Limpa as grids antes de carregar
             const categoriasValidas = ['camisas', 'moletons', 'calcas', 'perfumes', 'promocoes'];
             categoriasValidas.forEach(cat => { 
                 const grid = document.querySelector(`#${cat} .grid`); 
                 if (grid) grid.innerHTML = ""; 
             });
 
-            // Puxa do Firestore
             db.collection("produtos").get().then((querySnapshot) => {
                 if (querySnapshot.empty) {
                     console.log("Nenhum produto cadastrado ainda.");
@@ -950,7 +962,6 @@
                         const specialClass = isPromo ? 'card-special' : '';
                         const badgeHtml = isPromo ? '<span class="badge-vip">SALE</span>' : '';
 
-                        // Html da Cartinha de Produto (Igual ao seu design)
                         const cardHTML = `
                             <div class="card ${specialClass}">
                                 ${badgeHtml}
@@ -986,5 +997,4 @@
 
     </script>
 </body>
-</html>
 </html>
