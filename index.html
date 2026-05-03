@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HYPE STORE</title>
     <style>
-      /* ========================
+        /* ========================
            VARIÁVEIS ULTRA-MODERNAS
            ======================== */
         :root {
@@ -520,6 +520,24 @@
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
 
+        // ================= VERIFICADOR DE PAGAMENTO MERCADO PAGO =================
+        window.addEventListener('load', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const statusPagamento = urlParams.get('status');
+            const idDoPedido = urlParams.get('external_reference');
+
+            if (statusPagamento === 'approved' && idDoPedido) {
+                db.collection("pedidos").doc(idDoPedido).update({
+                    status: 'Aprovado (Pago)'
+                }).then(() => {
+                    alert("✅ Pagamento confirmado! Seu pedido já está sendo preparado.");
+                    window.history.replaceState(null, '', window.location.pathname);
+                }).catch(error => {
+                    console.error("Erro ao atualizar status:", error);
+                });
+            }
+        });
+
         // Variáveis de Interface e Carrinho
         const formatCurrency = (value) => value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
         let cart = JSON.parse(localStorage.getItem('hype_db_cart')) || [];
@@ -872,12 +890,13 @@
                 // Salva o Pedido no Firestore
                 db.collection("pedidos").add(orderData).then((docRef) => {
                     if (activeMethodTarget === 'card-form') {
-                        // LOGICA NOVA DO MERCADO PAGO VIA API (RENDER)
                         btnProcessPayment.innerHTML = "GERANDO LINK SEGURO..."; 
                         btnProcessPayment.style.background = "var(--acid-green)"; 
                         btnProcessPayment.style.color = "#000"; 
                         btnProcessPayment.style.opacity = "1";
 
+                        // ================= AQUI A MÁGICA ACONTECE =================
+                        // Enviamos o valor e o docRef.id para o servidor
                         fetch('https://api-hype-store.onrender.com/gerar-pagamento', {
                             method: 'POST',
                             headers: {
@@ -886,17 +905,15 @@
                             body: JSON.stringify({
                                 titulo: "Pedido Hype Store - #" + docRef.id,
                                 valor: finalTotal,
-                                email: currentUser.email
+                                email: currentUser.email,
+                                idPedido: docRef.id // ENVIA O ID DO PEDIDO PRO BACKEND
                             })
                         })
                         .then(response => response.json())
                         .then(dadosDoMercadoPago => {
                             if(dadosDoMercadoPago.init_point) {
-                                // Limpa o carrinho local
                                 cart = []; shippingCost = 0; lastCepData = null;
                                 updateCart();
-                                
-                                // Redireciona o cliente para pagar no MP
                                 window.location.href = dadosDoMercadoPago.init_point;
                             } else {
                                 throw new Error("Link não gerado pelo Mercado Pago");
